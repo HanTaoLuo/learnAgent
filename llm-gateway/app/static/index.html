@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Gateway 本地控制台</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div><p class="eyebrow">LOCAL DEVELOPMENT TOOL</p><h1>LLM Gateway 控制台</h1></div>
+      <span id="health-badge" class="badge">正在连接</span>
+    </header>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="gateway" role="tab">1. Gateway</button>
+      <button class="tab" data-tab="playground" role="tab">2. 调用调试</button>
+      <button class="tab" data-tab="prompts" role="tab">3. Prompts</button>
+      <button class="tab" data-tab="usage" role="tab">4. 用量监控</button>
+    </nav>
+
+    <section id="gateway" class="panel active">
+      <div class="grid two"><article class="card"><h2>DeepSeek 运行时 Key</h2>
+        <p class="muted">页面首次只显示配置状态。点击后才从当前进程的 <code>DEEPSEEK_API_KEY</code> 读取并明文展示；字段保持只读，且不会写入 .env、SQLite 或浏览器存储。</p>
+        <label>API Key <input id="runtime-key" type="text" autocomplete="off" readonly disabled placeholder="未配置 DEEPSEEK_API_KEY"></label>
+        <button id="load-environment-key" type="button">从本地环境读取</button>
+        <p id="key-status" class="status"></p>
+      </article><article class="card"><h2>本地状态</h2><dl id="config-status"></dl><p class="warning">仅用于本地调试，不是生产级密钥管理。</p></article></div>
+      <h2>模型注册</h2><div id="model-cards" class="grid two"></div>
+    </section>
+
+    <section id="playground" class="panel">
+      <div class="chat-workbench">
+        <aside class="chat-sidebar"><button id="new-conversation" class="primary">＋ 新建对话</button><p class="muted">仅保留在本次浏览器会话内</p><div id="conversation-list"></div></aside>
+        <article class="chat-main">
+          <header class="chat-header"><div><strong id="conversation-title">新对话</strong><p id="connection-status" class="muted">空闲：尚未发送请求</p></div><span id="connection-badge" class="badge">idle</span></header>
+          <div id="chat-log" class="chat-log"><div class="empty-chat">选择模型并输入问题，开始一次独立的调试对话。</div></div>
+          <div class="reconnect-panel"><strong>断开与重新订阅</strong><span>“断开订阅”只关闭当前浏览器连接，模型会在宽限时间内继续生成并可能继续计费；“取消生成”才会关闭上游。重新订阅只读取同一个 request_id 的内存事件，不会再次调用模型。</span><div class="actions"><button id="abort-request" disabled>断开订阅</button><button id="reconnect-request" disabled>重新订阅遗漏内容</button><button id="cancel-request" disabled>取消生成</button></div><label>Request ID <input id="history-request-id" placeholder="流开始后自动填入"></label><p id="history-output" class="status"></p></div>
+          <details class="request-settings"><summary>请求与高级设置</summary>
+            <div class="grid three"><label>模型 <select id="generate-model"></select></label><label>输入方式 <select id="input-mode"><option value="simple">单轮对话</option><option value="messages">多轮 messages</option></select></label><label class="check">流式 SSE <input id="stream-request" type="checkbox" checked></label></div>
+            <div id="simple-inputs"><label>System（可选）<textarea id="system-input" rows="2"></textarea></label></div>
+            <div id="messages-inputs" hidden><p class="muted">当前聊天窗口中已完成的 user / assistant 消息会自动作为历史上下文；这里可额外添加固定上下文。底部输入框始终是本轮新的 user 消息。</p><div id="message-list"></div><button id="add-message" type="button">添加额外历史消息</button></div>
+            <div class="grid three"><label>max tokens <input id="max-tokens" type="number" min="1" placeholder="默认"></label><label>temperature <input id="temperature" type="number" min="0" max="1" step="0.1"></label><label>top_p <input id="top-p" type="number" min="0" max="1" step="0.1"></label></div>
+            <div class="grid two"><label>输出格式 <select id="response-format"><option value="text">text</option><option value="json_object">json_object</option><option value="json_schema">json_schema</option></select></label><label id="schema-wrap" hidden>JSON Schema <textarea id="schema-json" rows="3">{"type":"object"}</textarea></label></div>
+            <details><summary>Prompt 注入</summary><label>Prompt ID <select id="prompt-id"><option value="">不使用</option></select></label><div class="grid two"><label>版本 <input id="prompt-version" type="number" min="1" placeholder="active"></label><label>位置 <select id="prompt-position"><option value="system">system</option><option value="prepend_messages">prepend_messages</option><option value="append_messages">append_messages</option></select></label></div><label>Variables JSON <textarea id="prompt-variables" rows="3">{}</textarea></label></details>
+          </details>
+          <div class="composer"><textarea id="user-input" rows="3" placeholder="输入消息，Enter 发送，Shift + Enter 换行"></textarea><button id="send-request" class="primary">发送</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="prompts" class="panel">
+      <div class="grid two"><article class="card"><h2>创建版本</h2><label>Prompt ID（留空自动生成）<input id="prompt-create-id"></label><label>Role <select id="prompt-role"><option>system</option><option>developer</option><option>user</option><option>assistant</option></select></label><label>Jinja2 模板 <textarea id="prompt-template" rows="12" placeholder="你是一名 {{ role }}。"></textarea></label><label class="check"><input id="prompt-activate" type="checkbox" checked> 设为 active version</label><button id="create-prompt" class="primary">创建版本</button><p id="prompt-status" class="status"></p></article><article class="card"><h2>渲染预览</h2><label>Prompt ID <select id="preview-prompt-id"></select></label><label>版本 <input id="preview-version" type="number" min="1" placeholder="active"></label><label>Variables JSON <textarea id="preview-variables" rows="5">{}</textarea></label><button id="preview-prompt">渲染预览</button><pre id="preview-output"></pre></article></div>
+      <h2>版本列表</h2><div id="prompt-list" class="table-wrap"></div>
+    </section>
+
+    <section id="usage" class="panel">
+      <div class="card"><h2>筛选</h2><div class="grid four"><label>Model <select id="usage-model"><option value="">全部</option></select></label><label>Status <select id="usage-status"><option value="">全部</option><option>completed</option><option>failed</option><option>cancelled</option></select></label><label>Request ID <input id="usage-request-id"></label><label>Limit <input id="usage-limit" type="number" min="1" max="1000" value="100"></label></div><label class="check"><input id="usage-auto-refresh" type="checkbox"> 自动刷新（10 秒）</label><button id="load-usage" class="primary">查询用量</button></div>
+      <div id="usage-summary" class="grid four"></div><div id="usage-table" class="table-wrap"></div><p class="warning">该监控接口尚未接入真正的调用方鉴权，仅适合本地开发环境。</p>
+    </section>
+  </main>
+  <script src="/static/app.js?v=20260906-1"></script>
+</body>
+</html>
