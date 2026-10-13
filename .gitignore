@@ -1,0 +1,9 @@
+/Look/
+
+# Python 字节码缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE 本地配置
+.idea/
