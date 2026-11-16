@@ -1,0 +1,386 @@
+# smolagents 项目入口、核心模块与调用关系分析
+
+仓库版本：`smolagents` 1.26.0（`pyproject.toml` `[project] version`；`src/smolagents/__init__.py:18` `__version__ = "1.26.0"`）
+
+---
+
+## 1. 项目入口（Entry Points）
+
+### 1.1 打包与控制台入口
+
+`pyproject.toml` 末尾定义了 `[project.scripts]`（两个 CLI 入口）：
+
+```toml
+[project.scripts]
+smolagent = "smolagents.cli:main"
+webagent = "smolagents.vision_web_browser:main"
+```
+
+即：
+
+- **`smolagent`** → `src/smolagents/cli.py` 的 `main()`
+- **`webagent`** → `src/smolagents/vision_web_browser.py` 的 `main()`
+
+此外 `src/smolagents/cli.py:292-294` 提供模块直接执行入口：
+
+```python
+if __name__ == "__main__":
+    main()
+```
+
+### 1.2 库级（import）入口：`src/smolagents/__init__.py`
+
+包的公开 API 由 `__init__.py` 一次性聚合导出（`src/smolagents/__init__.py:20-33`）：
+
+```python
+from .agent_types import *  # noqa: I001
+from .agents import *  # Above noqa avoids a circular dependency due to cli.py
+from .default_tools import *
+from .gradio_ui import *
+from .local_python_executor import *
+from .mcp_client import *
+from .memory import *
+from .models import *
+from .monitoring import *
+from .remote_executors import *
+from .serialization import *
+from .tools import *
+from .utils import *
+from .cli import *
+```
+
+注意其中的关键注释：`from .agents import *  # Above noqa avoids a circular dependency due to cli.py` —— 因为 `cli.py` 反过来 `from smolagents import CodeAgent, ...`（`cli.py:24-34`），所以必须让 `agents` 在 `cli` 之前导入，否则会形成循环导入。这也是理解模块依赖顺序的关键。
+
+### 1.3 CLI 的调用链
+
+`cli.py` 的调用关系（`src/smolagents/cli.py`）：
+
+1. `main()`（`cli.py:268-290`）
+   - 调用 `parse_arguments()`（`cli.py:44` 起）解析 `prompt`、`--model-type`、`--action-type`、`--model-id`、`--imports`、`--tools` 等
+   - 若无 `prompt`（`args.prompt is None`）则进入 `interactive_mode()`（`cli.py:180` 附近返回 `prompt, tools, model_type, model_id, provider, api_base, api_key, imports, action_type`）
+   - 最后调用 `run_smolagent(...)`
+2. `run_smolagent()`（`cli.py:213-262`）
+   - `load_dotenv()` 加载环境变量
+   - `load_model(model_type, model_id, ...)`（`cli.py:190-211`）按类型分派构造模型：
+     - `"OpenAIModel"` → `OpenAIModel(api_key=..., api_base=... "https://api.fireworks.ai/inference/v1", model_id=...)`
+     - `"LiteLLMModel"` → `LiteLLMModel(...)`
+     - `"TransformersModel"` → `TransformersModel(model_id=model_id, device_map="auto")`
+     - `"InferenceClientModel"` → `InferenceClientModel(token=api_key or os.getenv("HF_API_KEY"), provider=provider)`
+     - 其它 → `raise ValueError(f"Unsupported model type: {model_type}")`
+   - 工具解析：`"/" in tool_name` 时用 `Tool.from_space(space_id=tool_name, ...)` 从 HF Space 加载；否则查 `TOOL_MAPPING`（来自 `smolagents.default_tools`）实例化；都不匹配则 `ValueError("Tool ... is not recognized either as a default tool or a Space.")`
+   - 按 `action_type` 选择 agent 类：
+     ```python
+     if action_type == "code":
+         agent = CodeAgent(tools=available_tools, model=model,
+                           additional_authorized_imports=imports, stream_outputs=True)
+     elif action_type == "tool_calling":
+         agent = ToolCallingAgent(tools=available_tools, model=model, stream_outputs=True)
+     else:
+         raise ValueError(f"Unsupported action type: {action_type}")
+     agent.run(prompt)
+     ```
+
+因此 CLI 的完整链路为：
+`console script smolagent → cli.main → parse_arguments / interactive_mode → run_smolagent → load_model + TOOL_MAPPING/Tool.from_space → CodeAgent|ToolCallingAgent → agent.run(prompt)`
+
+---
+
+## 2. 核心模块
+
+| 模块 | 路径 | 职责 |
+|---|---|---|
+| `agents` | `src/smolagents/agents.py` (1813 行) | 核心：`MultiStepAgent` 基类 + `ToolCallingAgent` + `CodeAgent` + `AGENT_REGISTRY` |
+| `models` | `src/smolagents/models.py` (2102 行) | 模型抽象 `Model`、`get_clean_message_list`、`get_tool_call_from_text`、`supports_stop_parameter` 等 |
+| `memory` | `src/smolagents/memory.py` (316 行) | 记忆步骤数据类：`TaskStep`、`ActionStep`、`PlanningStep`、`SystemPromptStep`、`ToolCall` |
+| `tools` / `default_tools` | `src/smolagents/tools.py`, `default_tools.py` | `BaseTool`/`Tool` 抽象与 `TOOL_MAPPING` 默认工具集（含 `FinalAnswerTool`） |
+| `local_python_executor` / `remote_executors` | 同名文件 | `LocalPythonExecutor`（AST 级受限执行）、`BlaxelExecutor`/`E2BExecutor`/`DockerExecutor`/`ModalExecutor` |
+| `cli` | `src/smolagents/cli.py` (294 行) | 命令行/交互式入口 |
+| `agent_types` | `src/smolagents/agent_types.py` | `AgentImage`、`AgentAudio` 等类型 |
+| `monitoring` | `src/smolagents/monitoring.py` | `Monitor`（token 统计）、`AgentLogger`、`Timing` |
+| `serialization`、`gradio_ui`、`mcp_client`、`utils` | 同名文件 | 序列化、Web UI、MCP 适配、通用工具函数 |
+
+### 2.1 `agents.py` 类层次
+
+- `MultiStepAgent`（基类，`agents.py:~290-1150`）：负责 `__init__` 参数归一、工具注册、managed agents、memory、logger、monitor、callbacks、`run()`、`_run_stream()`、`_generate_planning_step()`、`to_dict`/`from_dict`/`from_folder`/`from_hub`/`push_to_hub`。
+- `ToolCallingAgent(MultiStepAgent)`（`agents.py:1141` 起）：JSON/原生 tool-calling 路径，`_step_stream` 见 `agents.py:1282-1375`，`process_tool_calls` 见 `agents.py:1377-1463`。
+- `CodeAgent(MultiStepAgent)`（`agents.py:1513` 起）："写代码来调用工具"路径，`_step_stream` 见 `agents.py:1641-1773`。
+- `AGENT_REGISTRY`（`agents.py:1806-1811`）：**白名单式反序列化**，只允许这两个类：
+
+```python
+AGENT_REGISTRY = {
+    "ToolCallingAgent": ToolCallingAgent,
+    "CodeAgent": CodeAgent,
+}
+```
+
+---
+
+## 3. 调用关系（核心执行流程）
+
+### 3.1 构造期：工具注册与记忆初始化
+
+`MultiStepAgent.__init__`（`agents.py:300-349`）依次：
+
+```python
+self.instructions = instructions
+self._setup_managed_agents(managed_agents)
+self._setup_tools(tools, add_base_tools)
+self._validate_tools_and_managed_agents(tools, managed_agents)
+
+self.task: str | None = None
+self.memory = AgentMemory(self.system_prompt)
+```
+
+- `_setup_tools`（`agents.py:390-403`）把 `list[BaseTool]` 转成 `dict[name -> tool]`，可选合并 `TOOL_MAPPING`，并**兜底注入 `final_answer`**：
+  ```python
+  self.tools = {tool.name: tool for tool in tools}
+  if add_base_tools:
+      self.tools.update({name: cls() for name, cls in TOOL_MAPPING.items()
+                         if name != "python_interpreter" or self.__class__.__name__ == "ToolCallingAgent"})
+  self.tools.setdefault("final_answer", FinalAnswerTool())
+  ```
+- `_setup_managed_agents`（`agents.py:355-389`）把子 agent 转成 `{name: agent}`，并为其生成 `inputs` schema（`task` + `additional_args`），使子 agent 可被当作"工具"调用。
+- `system_prompt` 是**只读属性**（`agents.py:351-359`），由子类的 `initialize_system_prompt()` 生成；setter 会抛 `AttributeError`。
+
+### 3.2 运行期：`run()` → `_run_stream()` → `_step_stream()`
+
+`MultiStepAgent.run()`（`agents.py:427-563`）：
+
+```python
+self.memory.system_prompt = SystemPromptStep(system_prompt=self.system_prompt)
+if reset:
+    self.memory.reset()
+    self.monitor.reset()
+
+self.logger.log_task(...)
+self.memory.steps.append(TaskStep(task=self.task, task_images=images))
+
+if getattr(self, "python_executor", None):
+    self.python_executor.send_variables(variables=self.state)
+    self.python_executor.send_tools({**self.tools, **self.managed_agents})
+
+if stream:
+    return self._run_stream(task=self.task, max_steps=max_steps, images=images)
+...
+steps = list(self._run_stream(task=self.task, max_steps=max_steps, images=images))
+assert isinstance(steps[-1], FinalAnswerStep)
+output = steps[-1].output
+```
+
+非流式模式下还会汇总 token（遍历 `ActionStep`/`PlanningStep` 的 `token_usage`）并返回 `RunResult(output, token_usage, steps, timing, state)`，`state` 为 `"success"` 或 `"max_steps_error"`（`agents.py:511-556`）。
+
+`_run_stream()`（`agents.py:565-651`）是主循环：
+
+```python
+self.step_number = 1
+returned_final_answer = False
+while not returned_final_answer and self.step_number <= max_steps:
+    if self.interrupt_switch:
+        raise AgentError("Agent interrupted.", self.logger)
+
+    # 按 planning_interval 插入规划步
+    if self.planning_interval is not None and (
+        self.step_number == 1 or (self.step_number - 1) % self.planning_interval == 0
+    ):
+        for element in self._generate_planning_step(task, is_first_step=len(self.memory.steps) == 1, step=self.step_number):
+            yield element
+        ...
+        self._finalize_step(planning_step)
+        self.memory.steps.append(planning_step)
+
+    action_step = ActionStep(step_number=self.step_number, timing=Timing(start_time=action_step_start_time),
+                             observations_images=images)
+    ...
+    for output in self._step_stream(action_step):
+        yield output
+        if isinstance(output, ActionOutput) and output.is_final_answer:
+            final_answer = output.output
+            if self.final_answer_checks:
+                self._validate_final_answer(final_answer)
+            returned_final_answer = True
+            action_step.is_final_answer = True
+    ...
+    finally:
+        self._finalize_step(action_step)
+        self.memory.steps.append(action_step)
+        yield action_step
+        self.step_number += 1
+```
+
+异常分层处理是本模块的设计要点（`agents.py:620-631`）：
+- `AgentGenerationError` → 直接 `raise`（框架/实现错误，不重试）
+- 其它 `AgentError` → 记录到 `action_step.error`，继续下一轮（让模型自我纠错）
+
+超过 `max_steps` 时调用 `_handle_max_steps_reached()`（`agents.py:659-672`），内部调用 `self.provide_final_answer(task)`，并将 `error=AgentMaxStepsError("Reached max steps.")` 写入最后一个 `ActionStep`。
+
+### 3.3 两种 `_step_stream` 实现
+
+#### (A) `CodeAgent._step_stream`（`agents.py:1641-1773`）
+
+四阶段：**生成 → 解析 → 执行 → 产出**。
+
+1. **生成**：`input_messages = self.write_memory_to_messages()`，`stop_sequences = ["Observation:", "Calling tools:"]`，并视 `code_block_tags` 追加结束标签；`_use_structured_outputs_internally` 为真时附加 `response_format=CODEAGENT_RESPONSE_FORMAT`。流式走 `self.model.generate_stream(...)` + `Live`/`Markdown` 渲染，非流式走 `self.model.generate(...)`。
+2. **解析**：
+   ```python
+   code_action = parse_code_blobs(output_text, self.code_block_tags)
+   code_action = fix_final_answer_code(code_action)
+   memory_step.code_action = code_action
+   ```
+   解析失败 → `AgentParsingError("Error in code parsing:\n...\nMake sure to provide correct code blobs.")`
+3. **执行**：伪造成一个工具调用再执行
+   ```python
+   tool_call = ToolCall(name="python_interpreter", arguments=code_action,
+                        id=f"call_{len(self.memory.steps)}")
+   yield tool_call
+   memory_step.tool_calls = [tool_call]
+   ...
+   code_output = self.python_executor(code_action)
+   ```
+   异常 → `AgentExecutionError`；若错误文本包含 `"Import of "` 且 `" is not allowed"`，额外提示用户把该 import 加到 `additional_authorized_imports`（`agents.py:1743-1749`）。
+4. **产出**：写入 `memory_step.observations`（`"Execution logs:\n" + logs` 与 `"Last output from code snippet:\n" + truncated_output`），最后 `yield ActionOutput(output=code_output.output, is_final_answer=code_output.is_final_answer)`。
+
+执行器构造由 `create_python_executor()`（`agents.py:1600-1625`）按 `executor_type` 分派：`local` → `LocalPythonExecutor(self.additional_authorized_imports, ...)`；`blaxel`/`e2b`/`docker`/`modal` → 对应远程执行器；远程执行不支持 `managed_agents`（`raise Exception("Managed agents are not yet supported with remote code execution.")`）。`cleanup()` 通过 `__exit__` 调用（`agents.py:1590-1598`）。
+
+可授权导入集合在 `__init__` 中合成：`self.authorized_imports = sorted(set(BASE_BUILTIN_MODULES) | set(self.additional_authorized_imports))`（`agents.py:1554`）。
+
+#### (B) `ToolCallingAgent._step_stream`（`agents.py:1282-1375`）
+
+1. **生成**：`self.model.generate_stream(..., stop_sequences=["Observation:", "Calling tools:"], tools_to_call_from=self.tools_and_managed_agents)`（或 `self.model.generate(...)`）。
+2. **解析**：若 `chat_message.tool_calls` 为空，回退到 `self.model.parse_tool_calls(chat_message)`（失败 → `AgentParsingError`）；否则对每个调用 `parse_json_if_needed(tool_call.function.arguments)`。
+3. **执行**：`self.process_tool_calls(chat_message, memory_step)` 产出 `ToolCall` 与 `ToolOutput`；若 `output.is_final_answer`：
+   - 多个 tool call 中夹带 final answer → `AgentExecutionError("If you want to return an answer, please do not perform any other tool calls than the final answer tool call!")`
+   - 多次 final answer → `AgentToolExecutionError("You returned multiple final answers...")`
+   - 若答案字符串命中 `self.state` 的 key，则替换为对应状态值。
+
+`process_tool_calls`（`agents.py:1377-1463`）的关键是**并行工具调用**：
+
+```python
+if len(parallel_calls) == 1:
+    tool_call = list(parallel_calls.values())[0]
+    tool_output = process_single_tool_call(tool_call)
+    ...
+else:
+    with ThreadPoolExecutor(self.max_tool_threads) as executor:
+        futures = []
+        for tool_call in parallel_calls.values():
+            ctx = copy_context()
+            futures.append(executor.submit(ctx.run, process_single_tool_call, tool_call))
+        for future in as_completed(futures):
+            tool_output = future.result()
+            yields...
+```
+
+注意 `copy_context()` + `ctx.run` 保证 `contextvars` 在子线程中正确传播。最后按 call id 排序拼装 `memory_step.tool_calls` 与 `memory_step.observations`。
+
+`ToolCallingAgent.tools_and_managed_agents`（`agents.py:1262-1265`）把工具与子 agent 合并交给模型：
+```python
+return list(self.tools.values()) + list(self.managed_agents.values())
+```
+
+### 3.4 单工具执行的统一出口：`execute_tool_call`
+
+两条路径最终都收敛到 `MultiStepAgent.execute_tool_call(tool_name, arguments)`（`agents.py:1489-1541`），顺序为：
+1. 合并 `available_tools = {**self.tools, **self.managed_agents}`，找不到 → `AgentToolExecutionError("Unknown tool ...")`
+2. `_substitute_state_variables(arguments)`（`agents.py:1480-1487`）：字符串参数若命中 `self.state` 的 key 则替换为真实值
+3. `validate_tool_arguments(tool, arguments)`，失败 → `AgentToolCallError`
+4. 调用：managed agent 用 `tool(**arguments)`；普通工具用 `tool(**arguments, sanitize_inputs_outputs=True)`（`AgentImage`/`AgentAudio` 会被存进 `self.state`，observation 变为 `"Stored 'image.png' in memory."`，见 `agents.py:1414-1421`）
+5. 任何执行异常 → `AgentToolExecutionError`，并在消息里提示模型 "Please try again or use another tool"
+
+### 3.5 记忆层：`memory.py`
+
+`ActionStep`（`memory.py:48-143`）是执行状态的载体，字段包括 `step_number`、`timing`、`model_input_messages`、`tool_calls`、`error`、`model_output_message`、`model_output`、`code_action`、`observations`、`observations_images`、`action_output`、`token_usage`、`is_final_answer`。其 `to_messages()` 把一步回放成对话消息，顺序为：
+
+1. `ASSISTANT`：`model_output`（非 summary 模式）
+2. `TOOL_CALL`：`"Calling tools:\n" + str([tc.dict() for tc in self.tool_calls])`
+3. `USER`：图片（`observations_images`）
+4. `TOOL_RESPONSE`：`f"Observation:\n{self.observations}"`
+5. `TOOL_RESPONSE`：错误重试提示 ——
+   ```
+   "Error:\n" + str(self.error) +
+   "\nNow let's retry: take care not to repeat previous errors! If you have retried several times, try a completely different approach.\n"
+   ```
+
+`PlanningStep`（`memory.py:146-176`）在 summary 模式返回空列表，否则产出 `plan` + `"Now proceed and carry out this plan."`，并附注释说明"第二条消息用于制造角色切换，防止模型把 plan 继续写下去"。`TaskStep`（`memory.py:179-188`）产出 `f"New task:\n{self.task}"` 加任务图片。
+
+### 3.6 模型层：`models.py`
+
+- `get_clean_message_list()`（`models.py:331-395`）：把内部 `ChatMessage` 列表转成 chat-template 兼容的 dict 列表，负责 **合并相邻同角色消息**（文本用 `"\n"` 连接，非文本元素 `append`）、图像 `encode_image_base64` / `image_url` 转换，以及对非法 role 报 `ValueError(f"Incorrect role {role}, only {MessageRole.roles()} are supported for now.")`。
+- `get_tool_call_from_text()`（`models.py:398-416`）：从文本里 `parse_json_blob` 提取 `{tool_name_key, tool_arguments_key}` 构造 `ChatMessageToolCall`，缺 key 时报 `ValueError(f"Tool call needs to have a key '{tool_name_key}'...")`。
+- `supports_stop_parameter()`（`models.py:419` 起）：判断模型是否支持 `stop` 参数（决定是否传 `stop_sequences`）。
+- 工具的 JSON schema 由 `models.py:320-329` 片段拼装：`{"type": "function", "function": {"name": tool.name, "description": tool.description, "parameters": {"type": "object", "properties": ..., "required": ...}}}`。
+
+### 3.7 序列化 / 反序列化闭环
+
+- `to_dict()`（`agents.py:~985-1005`）导出 `model`、`tools`、`managed_agents`、`prompt_templates`、`max_steps`、`verbosity_level`、`planning_interval`、`name`、`description`、`requirements`；`CodeAgent.to_dict()`（`agents.py:1775-1789`）额外追加 `authorized_imports`、`executor_type`、`executor_kwargs`、`max_print_outputs_length`。
+- `from_dict()`（`agents.py:1007-1067`）通过 `MODEL_REGISTRY` 与 `AGENT_REGISTRY` **白名单**查表构造，未知类直接 `ValueError`，避免 `importlib` 动态加载的任意代码执行风险（注册表注释见 `agents.py:1803-1805`）。
+- `from_hub()`（`agents.py:1069-1124`）强制 `trust_remote_code=True`，否则 `ValueError("Loading an agent from Hub requires to acknowledge you trust its code: ...")`；随后 `snapshot_download(..., repo_type="space")` 再到 `from_folder()`。
+- `from_folder()`（`agents.py:1126-1177`）读取 `agent.json`，把旧的 `"HfApiModel"` 自动改名为 `"InferenceClientModel"` 并 `logger.warning`，递归加载 `managed_agents/<name>/`，从 `tools/<name>.py` 读取工具源码。
+- `push_to_hub()`（`agents.py:1179-1234`）用 `create_repo(..., repo_type="space", space_sdk="gradio")` + `metadata_update(tags=["smolagents","agent"])` + `upload_folder`。
+
+---
+
+## 4. 依赖关系图（文字版）
+
+```
+console script: smolagent ──► cli.main
+                                ├─ parse_arguments / interactive_mode
+                                ├─ load_model ──► models.OpenAIModel | LiteLLMModel
+                                │                         | TransformersModel | InferenceClientModel
+                                ├─ TOOL_MAPPING / Tool.from_space
+                                └─ CodeAgent | ToolCallingAgent ──► agent.run()
+
+smolagents/__init__.py   (导出顺序: agent_types → agents → … → cli，避免 agents↔cli 循环导入)
+        │
+        ▼
+MultiStepAgent (agents.py)
+   ├─ _setup_managed_agents  ──► managed_agents dict (可当工具调用)
+   ├─ _setup_tools           ──► self.tools (setdefault final_answer)
+   ├─ memory = AgentMemory(system_prompt)  ──► memory.py: SystemPromptStep/TaskStep/ActionStep/PlanningStep
+   ├─ run() ──► _run_stream() ──► (planning?) ──► _step_stream()
+   │                                              ├─ CodeAgent:  generate → parse_code_blobs → python_executor → ActionOutput
+   │                                              └─ ToolCallingAgent: generate → parse_tool_calls → process_tool_calls(并行) → ActionOutput
+   │                                                        └─ execute_tool_call ──► tools / managed_agents
+   └─ to_dict/from_dict/from_folder/from_hub/push_to_hub ──► AGENT_REGISTRY / MODEL_REGISTRY
+```
+
+---
+
+## 5. 结论要点
+
+1. **入口有两条**：控制台脚本 `smolagent`→`cli.main`、`webagent`→`vision_web_browser.main`；库级入口是 `__init__.py` 的聚合 star-import，其导入顺序被刻意安排（`agents` 先于 `cli`）以打破 `agents ↔ cli` 的循环依赖。
+2. **核心抽象是 `MultiStepAgent`**，它把"工具注册、记忆、日志、监控、回调、规划、序列化"统一在一处；两个子类只在 `_step_stream()` 上分叉——`CodeAgent` 让 LLM 写 Python 代码（经 `LocalPythonExecutor`/远程执行器），`ToolCallingAgent` 走原生 JSON tool-calling（`process_tool_calls` 多线程并行）。
+3. **控制流高度统一**：无论哪条路径，动作都被归一为 `ToolCall` → `execute_tool_call` → `ToolOutput` → `ActionOutput(is_final_answer=...)`，再由 `_run_stream` 决定终止还是重试，异常按 `AgentGenerationError`（直接抛）与其它 `AgentError`（记录后续跑）分层处理。
+4. **安全设计集中在三处**：`AGENT_REGISTRY`/`MODEL_REGISTRY` 白名单反序列化、`from_hub` 强制 `trust_remote_code=True`、`CodeAgent` 的 `authorized_imports` 与 `sentinel` 式代码块标签 + `stop_sequences`。
+
+---
+
+## 6. 证据来源（精确引用）
+
+| 引用 | 位置 |
+|---|---|
+| 版本号 | `src/smolagents/__init__.py:18`；`pyproject.toml` `[project] version = "1.26.0"` |
+| 包导出顺序与循环依赖注释 | `src/smolagents/__init__.py:20-33` |
+| 控制台入口 | `pyproject.toml` `[project.scripts]` 末尾三行 |
+| CLI 模型分派 | `src/smolagents/cli.py:190-211` |
+| CLI agent 选择与 run | `src/smolagents/cli.py:244-262` |
+| CLI main | `src/smolagents/cli.py:268-294` |
+| `MultiStepAgent.__init__` | `src/smolagents/agents.py:300-349` |
+| `_setup_tools` 注入 final_answer | `src/smolagents/agents.py:390-403` |
+| `system_prompt` 只读属性 | `src/smolagents/agents.py:351-359` |
+| `run()` 与 RunResult | `src/smolagents/agents.py:427-563` |
+| `_run_stream()` 主循环 | `src/smolagents/agents.py:565-651` |
+| `_handle_max_steps_reached` | `src/smolagents/agents.py:659-672` |
+| `ToolCallingAgent.__init__` / `tools_and_managed_agents` | `src/smolagents/agents.py:1190-1265` |
+| `ToolCallingAgent._step_stream` | `src/smolagents/agents.py:1282-1375` |
+| `process_tool_calls`（ThreadPoolExecutor） | `src/smolagents/agents.py:1377-1463` |
+| `_substitute_state_variables` / `execute_tool_call` | `src/smolagents/agents.py:1480-1541` |
+| `CodeAgent.__init__` / `create_python_executor` | `src/smolagents/agents.py:1513-1625` |
+| `CodeAgent._step_stream` | `src/smolagents/agents.py:1641-1773` |
+| `AGENT_REGISTRY` | `src/smolagents/agents.py:1806-1811` |
+| `ActionStep` / `PlanningStep` / `TaskStep` | `src/smolagents/memory.py:48-188` |
+| `get_clean_message_list` / `get_tool_call_from_text` | `src/smolagents/models.py:331-416` |
+| 工具 JSON schema 构造 | `src/smolagents/models.py:320-329` |
+
+## 7. 测试证据说明
+
+本任务为"分析型（understand）"任务，未做任何源码修改，因此没有新增/运行测试；`recent_tests` 为空属预期。上述结论全部来自对列出的源码行区间的直接阅读（`read_file` / `read_range`），各文件的 sha256 已在工具返回中校验，例如 `src/smolagents/agents.py` = `da0da2e258c346e28d97b3584dfe58dcd203fc20fbde6c6533e333f9b1a06352`。

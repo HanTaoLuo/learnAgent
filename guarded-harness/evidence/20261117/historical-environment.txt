@@ -1,0 +1,23 @@
+Python 3.12.2
+Name: smolagents
+Version: 1.26.0
+Summary: 🤗 smolagents: a barebones library for agents. Agents write python code to call tools or orchestrate other agents.
+Home-page: 
+Author: 
+Author-email: Aymeric Roucher <aymeric@hf.co>
+License: 
+Location: /workspace/guarded-harness/.venv/lib/python3.12/site-packages
+Editable project location: /workspace/targets/understand
+Requires: huggingface-hub, jinja2, pillow, python-dotenv, requests, rich
+Required-by: guarded-harness
+---
+Name: pytest
+Version: 7.4.4
+Summary: pytest: simple powerful testing with Python
+Home-page: https://docs.pytest.org/en/latest/
+Author: Holger Krekel, Bruno Oliveira, Ronny Pfannschmidt, Floris Bruynooghe, Brianna Laugher, Florian Bruhin and others
+Author-email: 
+License: MIT
+Location: /opt/python/lib/python3.12/site-packages
+Requires: iniconfig, packaging, pluggy
+Required-by: 

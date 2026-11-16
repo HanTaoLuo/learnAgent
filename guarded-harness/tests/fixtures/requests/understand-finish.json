@@ -1,0 +1,3 @@
+[
+  {"id": "analysis-final", "tool": "final_answer", "arguments": {"answer": "代码理解报告已生成并通过结构与源码证据校验，详见 report.md。"}}
+]

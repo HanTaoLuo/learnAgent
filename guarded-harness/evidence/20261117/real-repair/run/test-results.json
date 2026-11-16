@@ -1,0 +1,48 @@
+[
+  {
+    "name": "unit",
+    "argv": [
+      "/workspace/guarded-harness/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-vv",
+      "-p",
+      "no:cacheprovider",
+      "test_calculator.py"
+    ],
+    "status": "FAILED",
+    "returncode": 1,
+    "output": "============================= test session starts ==============================\nplatform darwin -- Python 3.12.2, pytest-7.4.4, pluggy-1.0.0 -- /workspace/guarded-harness/.venv/bin/python\nrootdir: /workspace/targets/repair\ncollecting ... collected 1 item\n\ntest_calculator.py::test_add FAILED                                      [100%]\n\n=================================== FAILURES ===================================\n___________________________________ test_add ___________________________________\n\n    def test_add():\n        \"\"\"验证基准输入的加法结果，作为目标仓库的通过条件。\"\"\"\n>       assert add(2, 3) == 5\nE       assert -1 == 5\nE        +  where -1 = add(2, 3)\n\ntest_calculator.py:8: AssertionError\n=========================== short test summary info ============================\nFAILED test_calculator.py::test_add - assert -1 == 5\n============================== 1 failed in 0.01s ===============================\n",
+    "output_bytes": 1113,
+    "duration_seconds": 0.234545,
+    "process_group": 61223,
+    "tool_call_id": "call_00_l5PJstHpDu1bMFOcuT1O0534",
+    "fingerprint_before": "a1676c598ef68a0dfef907db52cfec5baf58b8e159c5e362daeb5a33d5514358",
+    "fingerprint_after": "a1676c598ef68a0dfef907db52cfec5baf58b8e159c5e362daeb5a33d5514358",
+    "write_count": 0,
+    "valid": false
+  },
+  {
+    "name": "unit",
+    "argv": [
+      "/workspace/guarded-harness/.venv/bin/python",
+      "-m",
+      "pytest",
+      "-vv",
+      "-p",
+      "no:cacheprovider",
+      "test_calculator.py"
+    ],
+    "status": "PASSED",
+    "returncode": 0,
+    "output": "============================= test session starts ==============================\nplatform darwin -- Python 3.12.2, pytest-7.4.4, pluggy-1.0.0 -- /workspace/guarded-harness/.venv/bin/python\nrootdir: /workspace/targets/repair\ncollecting ... collected 1 item\n\ntest_calculator.py::test_add PASSED                                      [100%]\n\n============================== 1 passed in 0.00s ===============================\n",
+    "output_bytes": 585,
+    "duration_seconds": 0.235234,
+    "process_group": 61278,
+    "tool_call_id": "call_00_qmGbyamaLeDlMtes93f16946",
+    "fingerprint_before": "7156ab81b8b5224d6e906e2e1095d059a22abe67e1533b862026f0734b0dd57e",
+    "fingerprint_after": "7156ab81b8b5224d6e906e2e1095d059a22abe67e1533b862026f0734b0dd57e",
+    "write_count": 1,
+    "valid": true
+  }
+]

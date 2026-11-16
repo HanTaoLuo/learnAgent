@@ -1,0 +1,23 @@
+{
+  "profiles": {
+    "understand": {
+      "backend": "deepseek",
+      "max_steps": 24,
+      "max_tool_calls": 96,
+      "model_max_tokens": 2048,
+      "context_chars": 120000
+    },
+    "repair-python": {
+      "backend": "deepseek",
+      "max_steps": 32,
+      "max_tool_calls": 128,
+      "model_max_tokens": 2048,
+      "context_chars": 120000,
+      "write_directories": ["src"],
+      "test_commands": {
+        "unit": ["@python", "-m", "pytest", "-q", "-p", "no:cacheprovider"]
+      },
+      "required_tests": ["unit"]
+    }
+  }
+}

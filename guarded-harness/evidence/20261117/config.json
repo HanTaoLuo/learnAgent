@@ -1,0 +1,24 @@
+{
+  "profiles": {
+    "understand": {
+      "backend": "deepseek",
+      "max_steps": 24,
+      "max_tool_calls": 96,
+      "model_max_tokens": 2048,
+      "context_chars": 120000
+    },
+  "repair-python": {
+    "backend": "deepseek",
+    "max_steps": 60,
+    "max_tool_calls": 240,
+    "model_max_tokens": 4096,
+    "context_chars": 120000,
+    "write_directories": [],
+    "write_paths": ["calculator.py"],
+    "test_commands": {
+      "unit": ["@python", "-m", "pytest", "-vv", "-p", "no:cacheprovider", "test_calculator.py"]
+    },
+    "required_tests": ["unit"]
+  }
+  }
+}

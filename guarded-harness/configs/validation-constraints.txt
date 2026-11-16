@@ -1,0 +1,5 @@
+# 与发布证据中的实际验证环境对齐；运行时依赖由 pyproject.toml 声明。
+smolagents==1.26.0
+pytest==7.4.4
+requests==2.34.2
+python-dotenv==0.21.0

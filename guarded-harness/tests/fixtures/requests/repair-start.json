@@ -1,0 +1,8 @@
+[
+  {"id": "baseline", "tool": "run_test", "arguments": {"name": "unit"}},
+  {
+    "id": "fix",
+    "tool": "write_file",
+    "arguments": {"path": "calculator.py", "content": "def add(a: int, b: int) -> int:\n    \"\"\"返回两个整数之和。\"\"\"\n    return a + b\n"}
+  }
+]

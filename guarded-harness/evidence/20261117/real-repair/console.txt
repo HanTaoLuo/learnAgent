@@ -1,0 +1,70 @@
+Step 1 tools=["list_files"]
+Step 2 tools=["read_file"]
+Step 3 tools=["read_file"]
+Step 4 tools=["run_test"]
+Step 5 tools=["edit_file"]
+Call "call_00_ftPaUTGL5pk8j5GrZb8u2487" | edit_file
+--- a/calculator.py
++++ b/calculator.py
+@@ -3,4 +3,4 @@
+ 
+ def add(a: int, b: int) -> int:
+     """返回两个整数之和，供目标仓库的基准测试调用。"""
+-    return a - b
++    return a + b
+
+Approve [y], deny [n], revise report [r], or pause [q]: Step 6 tools=["read_file"]
+Step 7 tools=["run_test"]
+Step 8 tools=["write_report"]
+Call "call_00_UwgXMQOODfAoOue5R7Td0215" | write_report
+# Repair Report: calculator.py
+
+## Problem
+`calculator.py` implemented `add` as subtraction, so integer addition semantics were broken and the existing benchmark test failed.
+
+## Root Cause (source evidence)
+File: `calculator.py` (original sha256 `7c9eb6d4...112780c`)
+```python
+def add(a: int, b: int) -> int:
+    """返回两个整数之和，供目标仓库的基准测试调用。"""
+    return a - b          # line 6 — subtraction instead of addition
+```
+
+Test evidence: `test_calculator.py` (unchanged, sha256 `466b6815...5031c586`)
+```python
+def test_add():
+    assert add(2, 3) == 5
+```
+Initial test run (`unit`, before any source change): **FAILED**
+`assert -1 == 5` → `where -1 = add(2, 3)`; returncode 1, write_count 0.
+
+## Fix
+Minimal one-line change in `calculator.py`:
+```diff
+-    return a - b
++    return a + b
+```
+Current file sha256: `8d534afd03fd81fca74d612fe424488b4d877b21fede1a2b8a4c8eba2f02f768`
+
+Rationale: the function is documented as returning the sum of two integers and the test expects `add(2, 3) == 5`. Restoring `a + b` restores integer addition semantics while keeping the signature, docstring and module API untouched. `test_calculator.py` was not modified.
+
+## Verification
+Post-fix run of required test alias `unit` on the current source:
+`python -m pytest -vv -p no:cacheprovider test_calculator.py` → **PASSED**
+`test_calculator.py::test_add PASSED` — `1 passed in 0.00s`, returncode 0, valid: true.
+
+| Run | Source sha256 | Result |
+|---|---|---|
+| Initial (pre-fix) | `7c9eb6d4…12780c` | FAILED (`assert -1 == 5`) |
+| Post-fix | `8d534afd…2f02f768` | PASSED (1 passed) |
+
+## Conclusion
+The defect (subtraction in `add`) is fixed; integer addition semantics are preserved and all required tests pass.
+
+Approve [y], deny [n], revise report [r], or pause [q]: Run: 980fdbd70f8942098d93e29a7c610e6c
+Directory: /workspace/runs/repair
+Status: WAITING_APPROVAL
+Reason: APPROVAL_REQUIRED
+Steps: 8/60
+Tool calls: 8/240
+Pending: call_00_UwgXMQOODfAoOue5R7Td0215 (write_report)

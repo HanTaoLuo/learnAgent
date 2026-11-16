@@ -1,0 +1,8 @@
+--- a/calculator.py
++++ b/calculator.py
+@@ -3,4 +3,4 @@
+ 
+ def add(a: int, b: int) -> int:
+     """返回两个整数之和，供目标仓库的基准测试调用。"""
+-    return a - b
++    return a + b

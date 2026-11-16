@@ -1,0 +1,15 @@
+{
+  "python": "3.12.2",
+  "platform": "darwin",
+  "packages": {
+    "guarded-harness": "0.1.0",
+    "smolagents": "1.26.0",
+    "pytest": "7.4.4",
+    "requests": "2.34.2",
+    "python-dotenv": "0.21.0",
+    "urllib3": "2.2.2",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "2.0.4",
+    "idna": "3.7"
+  }
+}

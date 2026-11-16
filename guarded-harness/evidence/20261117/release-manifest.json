@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "version": "0.1.0",
+  "generated_at": "2026-11-16T17:07:16.206702+00:00",
+  "regression": {
+    "tests": 203,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "duration_seconds": 20.876
+  },
+  "runtime_binding": {
+    "method": "same-session budget audit records matching all runtime file hashes",
+    "runtime_sha256": {
+      "state_store.py": "23bd2cfb8a7e065761a16dbba5c1d4e220654e26df91d638fd361810279caae5",
+      "harness.py": "a49ccc09e15d63900e4726ae0d0185fbdf0996eabdc52f76598124b508f70515",
+      "audit.py": "08041a4be2f086a1d1fd796f0b0d59bd6254af59cb2456f6f6d62e81918d6afd",
+      "checkpoint.py": "10154396b3f93d2d9a9deb9624feded3cd28dccb87853b4fb7fa0b3b6daf4334",
+      "__init__.py": "af61cc266823089df101cdb1d4db232db8f1f41523f72be53ba0360de3b68e0c",
+      "sandbox.py": "13f6f8de7ace53ed42f50edec53e7a4fdec0df127425a8f0d69d65444a2fad7a",
+      "gate.py": "1833af6c6bf3c98d2ce480d487e943abd30bfbea60821818e697b9ed4430025f"
+    },
+    "witness_change_id": "4ba5e239e1ad42c09b6cf86ee10e9f09",
+    "limitation": "Repair has no independent source snapshot captured at its start; the matching audit witness corroborates the session runtime, not a signed per-run attestation."
+  },
+  "environment_scope": {
+    "environment.json": "current offline regression after dependency alignment",
+    "historical-environment.txt": "saved real-run session environment; HTTP dependencies were not fully captured",
+    "real_model_rerun_during_export": false
+  },
+  "runs": {
+    "02-understand": {
+      "run_id": "672349a295794f08a5ea0365028b34c4",
+      "status": "SUCCEEDED",
+      "stop_reason": "COMPLETED",
+      "steps_used": 78,
+      "tool_calls_used": 52
+    },
+    "03-repair": {
+      "run_id": "980fdbd70f8942098d93e29a7c610e6c",
+      "status": "SUCCEEDED",
+      "stop_reason": "COMPLETED",
+      "steps_used": 9,
+      "tool_calls_used": 9
+    }
+  },
+  "redaction": {
+    "paths": "portable /workspace placeholders",
+    "actors": "operator",
+    "host": "validation-host",
+    "credentials": "environment values and recognizable token patterns removed",
+    "ids": "preserved for correlation",
+    "resume_supported": false
+  },
+  "original_input_sha256": {
+    "regression/pytest.txt": "e1cc660356bb98cb3adc004cfcd6845a5d8fd9a27517db933620bbae9f245935",
+    "regression/junit.xml": "aeb452b13f25fa58f1a2e3d62e94d6a050c178ecf7184ee27c917d56339953f8",
+    "regression/exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "real-understand/run/state.json": "9556e798bc4cbebba22e952dd2bf02f7048716ed32faaa4a205ab9982e0f9523",
+    "real-understand/run/checkpoint.json": "9556e798bc4cbebba22e952dd2bf02f7048716ed32faaa4a205ab9982e0f9523",
+    "real-understand/run/audit.jsonl": "4d1e59898eae96eca500462981d13cc9a5a84daa947e737d3d228914a1fdc6e9",
+    "real-understand/run/report.md": "e5168c15c969143ff20329a5148220b55e00a660a570a994d70a4ecce0447eb7",
+    "real-understand/console.txt": "c547c7400af6212ecad94c0bc6e004ff421a3a9158b6f8ecd0cddbd9b5dbe423",
+    "real-understand/resume-console.txt": "ac3256c0d991e882c9977295ce46a78f82b428b695e6c545ec828d110797f16f",
+    "real-repair/run/state.json": "12f6092fd02f38747fbb63e2fc8d5ace98867b9ac818f3d508e24465bce847bf",
+    "real-repair/run/checkpoint.json": "12f6092fd02f38747fbb63e2fc8d5ace98867b9ac818f3d508e24465bce847bf",
+    "real-repair/run/audit.jsonl": "44e328e02c49d98f34e26545040e991b6fe3415edcdd6934672990a1a4970ff2",
+    "real-repair/run/report.md": "6485196df909021b27faca08be62fb1adf9058dc762b5b62498b88ff6991cc2f",
+    "real-repair/run/changes.patch": "cc5278b8a372631a98773133f31d04d87ea74f74b525eac7dce4b1d56a8a0f51",
+    "real-repair/run/test-results.json": "c210d6526576b0bcd642fb897ce83ff585690dbe0aa239797a2cf00725ceaf2b",
+    "real-repair/console.txt": "445dee5ebaee72a9cfaab9508ae40a8184ebaae4eb703195d6598b84313a03bd",
+    "real-repair/resume-console.txt": "6774df5a8a371fbf1f6c9be654aee7d0d3c353b159495b79f6adec8677c33345",
+    "config.json": "e94f718bc70fb6d3d9649b04a6ae6f7c39dbaf2f890f56b9b937d3172f2208a0",
+    "historical-environment.txt": "bd3b8b5a3928ab1e6300b8adc6758030b0c821496231a81806ddf0debf47ff86",
+    "real-repair/checkpoint-before-resume.json": "a3a3e18472c698d783d49ea8c5dbbad37a04bcd8c5bf915100d471c3fbe9799e",
+    "real-repair/checkpoint-after-resume.json": "12f6092fd02f38747fbb63e2fc8d5ace98867b9ac818f3d508e24465bce847bf"
+  },
+  "published_sha256": {
+    "README.md": "5d095543f70cc77dbae612891ec5983d53b6540b1f81387e6af5042f804bb3de",
+    "config.json": "e94f718bc70fb6d3d9649b04a6ae6f7c39dbaf2f890f56b9b937d3172f2208a0",
+    "environment.json": "58a4f11cac99487d20c820e47a679601bafd4902637b8a929f9c76023a236e5c",
+    "historical-environment.txt": "0970bfc38a25ac7f49560896c1aff7c3ec6095ac26641889a387e05dcc79993d",
+    "real-repair/REPORT_ERRATA.md": "02a7b391daa5335d474a7a5d176d8e04fd2ceaf0ff697b3be2d6e3810fd3d139",
+    "real-repair/checkpoint-after-resume.json": "f420639c39e112ae90d7d142a39da3c6b6b4b112505ed1c37a57d5716b11a4a9",
+    "real-repair/checkpoint-before-resume.json": "e93299328cb8166a983828ad64aa032264167b25bbc18c4f9e329deef3bb983e",
+    "real-repair/console.txt": "a4a6c6efc3df9fb80824c0ebebb4c23e29f5c9f88451690c7aecdb5eb5477c6e",
+    "real-repair/recovery-notes.md": "d92e648d1e0cb8db89bb6e40a0f76d86f16126523cda15ea20985a0a7f700de3",
+    "real-repair/recovery-proof.json": "4492c278897caa0a16867d132991182a289542857f014e6a20c65a4fcee398b5",
+    "real-repair/resume-console.txt": "561b2b821e893edcdc47121cc2a45ab2cda56e9b8a7b6d00c0cc259657c4bd17",
+    "real-repair/run/audit.jsonl": "a0b2366467a90d7824739a28c9f7635da5ac96a8bc4300873f8a7dae02cb4386",
+    "real-repair/run/changes.patch": "cc5278b8a372631a98773133f31d04d87ea74f74b525eac7dce4b1d56a8a0f51",
+    "real-repair/run/checkpoint.json": "f420639c39e112ae90d7d142a39da3c6b6b4b112505ed1c37a57d5716b11a4a9",
+    "real-repair/run/report-corrected.md": "a10aaadcfa8c0a0db27b2de132308b34b7550457216aa19a08c17b42bbc00d22",
+    "real-repair/run/report.md": "6485196df909021b27faca08be62fb1adf9058dc762b5b62498b88ff6991cc2f",
+    "real-repair/run/state.json": "f420639c39e112ae90d7d142a39da3c6b6b4b112505ed1c37a57d5716b11a4a9",
+    "real-repair/run/test-results.json": "80fab7a4d977dfd89f3d0c8cee6381c0b2ea56c65581e58e8a36cd7e7e64b24c",
+    "real-understand/console.txt": "efe8259eec62cda7d1a6c76fda88dd93742f43190db2eb64053efd1a8d2400d1",
+    "real-understand/resume-console.txt": "eb2c14410f9a015d53a898306f3b75092d9de40953a3c5f79f78090f04efe304",
+    "real-understand/run/audit.jsonl": "638a780d89e5a6852c0f504b06eb9a309aeaa9f5618ee69f26b3c2952ce4ee11",
+    "real-understand/run/checkpoint.json": "ba088712a22213d64cd0e9261723180b597a9fa6248d9605c3e74f84b7628452",
+    "real-understand/run/report.md": "e5168c15c969143ff20329a5148220b55e00a660a570a994d70a4ecce0447eb7",
+    "real-understand/run/state.json": "ba088712a22213d64cd0e9261723180b597a9fa6248d9605c3e74f84b7628452",
+    "regression/exit-code.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "regression/junit.xml": "9561aac211f6e5402823eb69551f68b00356c9adc39d761c70e64de6cc53039a",
+    "regression/pytest.txt": "14d126d46ba0e44023ba0728e9b1079df29dbb4bf5887e36a0c360c186b27d7a",
+    "source.sha256": "a465b57a8919f26dc5ae2e565557dcf540ad1331a89834475a51b94ca15db4f2"
+  }
+}

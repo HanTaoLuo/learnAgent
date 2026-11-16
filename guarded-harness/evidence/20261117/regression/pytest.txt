@@ -1,0 +1,1567 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.2, pytest-7.4.4, pluggy-1.0.0 -- /workspace/guarded-harness/.venv/bin/python
+rootdir: /workspace/guarded-harness
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.2.0
+collecting ... collected 203 items
+
+tests/test_audit.py::test_audit_appends_and_preserves_correlation_fields PASSED [  0%]
+tests/test_audit.py::test_approval_and_execution_are_linked_by_original_call_id PASSED [  0%]
+tests/test_audit.py::test_sensitive_symlink_denial_records_sandbox_and_gate PASSED [  1%]
+tests/test_audit.py::test_runtime_discovery_boundary_denial_is_audited_and_persisted[list_files-arguments0] PASSED [  1%]
+tests/test_audit.py::test_runtime_discovery_boundary_denial_is_audited_and_persisted[find_files-arguments1] PASSED [  2%]
+tests/test_audit.py::test_runtime_discovery_boundary_denial_is_audited_and_persisted[search_code-arguments2] PASSED [  2%]
+tests/test_audit.py::test_file_open_symlink_denial_is_classified_as_boundary PASSED [  3%]
+tests/test_audit.py::test_side_effect_boundary_failure_retains_unknown_result[write_file] PASSED [  3%]
+tests/test_audit.py::test_side_effect_boundary_failure_retains_unknown_result[run_test] PASSED [  4%]
+tests/test_completion.py::test_final_answer_without_evidence_is_rejected PASSED [  4%]
+tests/test_completion.py::test_changing_source_invalidates_read_evidence PASSED [  5%]
+tests/test_completion.py::test_empty_answer_is_rejected PASSED           [  5%]
+tests/test_completion.py::test_passed_tests_become_stale_after_another_approved_write PASSED [  6%]
+tests/test_completion.py::test_changed_report_artifact_cannot_use_old_approval PASSED [  6%]
+tests/test_completion.py::test_all_required_commands_must_pass PASSED    [  7%]
+tests/test_completion.py::test_understanding_mode_rejects_source_write_capabilities PASSED [  7%]
+tests/test_completion.py::test_latest_failed_result_cannot_reuse_an_earlier_pass PASSED [  8%]
+tests/test_gate.py::test_invalid_arguments_never_enter_handler[arguments0] PASSED [  8%]
+tests/test_gate.py::test_invalid_arguments_never_enter_handler[arguments1] PASSED [  9%]
+tests/test_gate.py::test_invalid_arguments_never_enter_handler[arguments2] PASSED [  9%]
+tests/test_gate.py::test_invalid_arguments_never_enter_handler[None] PASSED [ 10%]
+tests/test_gate.py::test_invalid_arguments_never_enter_handler[a] PASSED [ 10%]
+tests/test_gate.py::test_third_identical_action_is_blocked PASSED        [ 11%]
+tests/test_gate.py::test_same_call_id_is_not_executed_twice PASSED       [ 11%]
+tests/test_gate.py::test_different_invalid_request_breaks_consecutive_sequence[unknown-arguments0] PASSED [ 12%]
+tests/test_gate.py::test_different_invalid_request_breaks_consecutive_sequence[read_file-arguments1] PASSED [ 12%]
+tests/test_gate.py::test_different_invalid_request_breaks_consecutive_sequence[read_file-arguments2] PASSED [ 13%]
+tests/test_gate.py::test_escape_is_blocked_before_handler PASSED         [ 13%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments0] PASSED [ 14%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments1] PASSED [ 14%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments2] PASSED [ 15%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments3] PASSED [ 15%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments4] PASSED [ 16%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments5] PASSED [ 16%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments6] PASSED [ 17%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments7] PASSED [ 17%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments8] PASSED [ 18%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments9] PASSED [ 18%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments10] PASSED [ 19%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments11] PASSED [ 19%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments12] PASSED [ 20%]
+tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments13] PASSED [ 20%]
+tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments0] PASSED [ 21%]
+tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments1] PASSED [ 21%]
+tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments2] PASSED [ 22%]
+tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments3] PASSED [ 22%]
+tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments4] PASSED [ 23%]
+tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[.] PASSED [ 23%]
+tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[../] PASSED [ 24%]
+tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[.git] PASSED [ 24%]
+tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[linked] PASSED [ 25%]
+tests/test_gate.py::test_write_tools_are_not_enabled_in_read_only_configuration PASSED [ 25%]
+tests/test_gate.py::test_unapproved_write_pauses_without_entering_handler PASSED [ 26%]
+tests/test_gate.py::test_approved_call_executes_once_and_replay_is_rejected PASSED [ 26%]
+tests/test_gate.py::test_rejection_persistence_failure_is_not_reported_as_a_committed_result PASSED [ 27%]
+tests/test_gate.py::test_approval_denial_stops_without_write PASSED      [ 27%]
+tests/test_gate.py::test_write_path_outside_explicit_allowlist_never_requests_approval PASSED [ 28%]
+tests/test_gate.py::test_approval_cannot_be_reused_with_modified_parameters PASSED [ 28%]
+tests/test_gate.py::test_run_test_outside_configuration_never_enters_handler PASSED [ 29%]
+tests/test_gate.py::test_repair_write_requires_real_initial_failure PASSED [ 29%]
+tests/test_gate.py::test_exhausted_budget_does_not_reopen_a_successful_run PASSED [ 30%]
+tests/test_gate.py::test_report_revision_interface_cannot_resume_denied_source_write PASSED [ 30%]
+tests/test_harness_loop.py::test_production_entry_has_no_scripted_model PASSED [ 31%]
+tests/test_harness_loop.py::test_real_profile_runs_task_and_approval_needs_no_credential PASSED [ 31%]
+tests/test_harness_loop.py::test_directory_permission_and_hash_bound_edit_still_require_approval PASSED [ 32%]
+tests/test_harness_loop.py::test_large_source_range_is_verified_and_can_complete PASSED [ 32%]
+tests/test_harness_loop.py::test_context_keeps_recent_tool_pairs_without_losing_durable_evidence PASSED [ 33%]
+tests/test_harness_loop.py::test_interactive_mode_approves_exact_report_and_keeps_json_clean PASSED [ 33%]
+tests/test_harness_loop.py::test_host_cancel_request_blocks_next_tool_and_explicit_resume_preserves_budget PASSED [ 33%]
+tests/test_harness_loop.py::test_host_profile_rejects_secret_fields_and_ambiguous_permission_types[profile0] PASSED [ 34%]
+tests/test_harness_loop.py::test_host_profile_rejects_secret_fields_and_ambiguous_permission_types[profile1] PASSED [ 34%]
+tests/test_harness_loop.py::test_host_profile_rejects_secret_fields_and_ambiguous_permission_types[profile2] PASSED [ 35%]
+tests/test_harness_loop.py::test_workspace_configuration_cannot_grant_itself_permissions PASSED [ 35%]
+tests/test_harness_loop.py::test_oversized_latest_context_stops_with_explicit_reason PASSED [ 36%]
+tests/test_harness_loop.py::test_initial_plan_tracks_real_repair_evidence PASSED [ 36%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps0-0] PASSED [ 37%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps1-0] PASSED [ 37%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps2-0] PASSED [ 38%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps3-0] PASSED [ 38%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps4-0] PASSED [ 39%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps5--1] PASSED [ 39%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps6-1] PASSED [ 40%]
+tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps7-True] PASSED [ 40%]
+tests/test_harness_loop.py::test_model_plan_cannot_replace_completion_evidence PASSED [ 41%]
+tests/test_harness_loop.py::test_default_api_requires_approved_report PASSED [ 41%]
+tests/test_harness_loop.py::test_offline_driver_keeps_strict_defaults_and_rejects_general PASSED [ 42%]
+tests/test_harness_loop.py::test_real_agent_loop_reads_then_finishes PASSED [ 42%]
+tests/test_harness_loop.py::test_denial_is_returned_to_model_and_next_step_can_continue PASSED [ 43%]
+tests/test_harness_loop.py::test_step_budget_stops_without_extra_model_request PASSED [ 43%]
+tests/test_harness_loop.py::test_generation_failure_is_saved_before_raising PASSED [ 44%]
+tests/test_harness_loop.py::test_write_and_other_calls_in_same_step_are_all_rejected PASSED [ 44%]
+tests/test_harness_loop.py::test_unresolved_approval_does_not_consume_more_model_budget PASSED [ 45%]
+tests/test_harness_loop.py::test_command_line_approval_and_resume_use_separate_processes PASSED [ 45%]
+tests/test_harness_loop.py::test_understanding_task_requires_approved_report_artifact PASSED [ 46%]
+tests/test_harness_loop.py::test_repair_task_runs_real_failure_fix_retest_and_artifact PASSED [ 46%]
+tests/test_harness_loop.py::test_tool_call_budget_stops_without_claiming_completion PASSED [ 47%]
+tests/test_harness_loop.py::test_test_command_mutating_source_invalidates_workspace PASSED [ 47%]
+tests/test_harness_loop.py::test_controller_cancellation_stops_test_and_model_loop PASSED [ 48%]
+tests/test_harness_loop.py::test_repair_cli_restores_command_policy_and_test_evidence PASSED [ 48%]
+tests/test_harness_loop.py::test_keyboard_interrupt_terminates_running_cli_test PASSED [ 49%]
+tests/test_harness_loop.py::test_host_can_return_report_for_revision_without_writing_it PASSED [ 49%]
+tests/test_harness_loop.py::test_protected_batch_honors_call_budget PASSED [ 50%]
+tests/test_harness_loop.py::test_duplicate_id_in_protected_batch_restores_each_rejection PASSED [ 50%]
+tests/test_harness_loop.py::test_adapter_serializes_tools_and_parses_original_call_id PASSED [ 51%]
+tests/test_harness_loop.py::test_real_adapter_drives_guarded_loop_without_persisting_secret PASSED [ 51%]
+tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[https://user:password@example.com] PASSED [ 52%]
+tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[https://example.com?api_key=secret] PASSED [ 52%]
+tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[https://example.com#secret] PASSED [ 53%]
+tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[file:///tmp/model] PASSED [ 53%]
+tests/test_harness_loop.py::test_environment_overrides_explicit_file_without_modifying_global_environment PASSED [ 54%]
+tests/test_harness_loop.py::test_saved_model_configuration_cannot_be_redirected_on_resume PASSED [ 54%]
+tests/test_harness_loop.py::test_missing_credential_is_reported_by_variable_name PASSED [ 55%]
+tests/test_harness_loop.py::test_http_and_transport_errors_do_not_echo_credentials PASSED [ 55%]
+tests/test_harness_loop.py::test_invalid_chat_response_is_rejected[not json] PASSED [ 56%]
+tests/test_harness_loop.py::test_invalid_chat_response_is_rejected[payload1] PASSED [ 56%]
+tests/test_harness_loop.py::test_invalid_chat_response_is_rejected[payload2] PASSED [ 57%]
+tests/test_harness_loop.py::test_model_response_size_limit_is_enforced PASSED [ 57%]
+tests/test_harness_loop.py::test_harness_refuses_secret_fields_in_public_metadata PASSED [ 58%]
+tests/test_harness_loop.py::test_cli_requires_explicit_real_backend_when_no_script PASSED [ 58%]
+tests/test_harness_loop.py::test_cli_real_backend_restores_public_configuration_and_environment_secret PASSED [ 59%]
+tests/test_harness_loop.py::test_cli_refuses_real_backend_combined_with_a_script PASSED [ 59%]
+tests/test_harness_loop.py::test_provider_output_limit_stops_without_retrying_or_losing_usage PASSED [ 60%]
+tests/test_harness_loop.py::test_output_budget_extension_regenerates_clipped_response_without_replaying_tools[False] PASSED [ 60%]
+tests/test_harness_loop.py::test_output_budget_extension_regenerates_clipped_response_without_replaying_tools[True] PASSED [ 61%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[None] PASSED [ 61%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[0] PASSED [ 62%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[True] PASSED [ 62%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[512] PASSED [ 63%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[1024] PASSED [ 63%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[8193] PASSED [ 64%]
+tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[3.5] PASSED [ 64%]
+tests/test_harness_loop.py::test_step_extension_does_not_unlock_an_output_limited_run PASSED [ 65%]
+tests/test_harness_loop.py::test_output_extension_requires_saved_real_model_configuration PASSED [ 65%]
+tests/test_harness_loop.py::test_cli_parsing_errors_go_to_stderr_without_corrupting_json PASSED [ 66%]
+tests/test_sandbox.py::test_escape_and_symlink_escape_are_denied PASSED  [ 66%]
+tests/test_sandbox.py::test_sensitive_paths_and_symlink_alias_are_denied PASSED [ 66%]
+tests/test_sandbox.py::test_read_limit_is_enforced PASSED                [ 67%]
+tests/test_sandbox.py::test_write_rejects_symlink_and_preserves_external_content PASSED [ 67%]
+tests/test_sandbox.py::test_atomic_write_creates_allowed_file_and_returns_hashes PASSED [ 68%]
+tests/test_sandbox.py::test_workspace_fingerprint_tracks_source_changes_but_ignores_runtime_cache PASSED [ 68%]
+tests/test_sandbox.py::test_fingerprint_tracks_allowed_directories_with_env_prefix PASSED [ 69%]
+tests/test_sandbox.py::test_unregistered_test_command_is_never_spawned PASSED [ 69%]
+tests/test_sandbox.py::test_test_process_uses_filtered_environment PASSED [ 70%]
+tests/test_sandbox.py::test_test_output_is_bounded_and_process_is_terminated PASSED [ 70%]
+tests/test_sandbox.py::test_timeout_and_cancellation_kill_descendant_group[TIMEOUT] PASSED [ 71%]
+tests/test_sandbox.py::test_timeout_and_cancellation_kill_descendant_group[CANCELLED] PASSED [ 71%]
+tests/test_sandbox.py::test_real_pytest_failure_and_success_return_exit_codes PASSED [ 72%]
+tests/test_sandbox.py::test_exited_group_leader_does_not_leave_a_running_descendant PASSED [ 72%]
+tests/test_sandbox.py::test_symlink_swap_between_check_and_open_is_denied PASSED [ 73%]
+tests/test_sandbox.py::test_parent_symlink_swap_after_validation_cannot_escape[read] PASSED [ 73%]
+tests/test_sandbox.py::test_parent_symlink_swap_after_validation_cannot_escape[write] PASSED [ 74%]
+tests/test_sandbox.py::test_parent_symlink_swap_after_validation_cannot_escape[list] PASSED [ 74%]
+tests/test_sandbox.py::test_write_parent_swap_after_temp_sync_aborts_and_cleans_original_directory PASSED [ 75%]
+tests/test_sandbox.py::test_search_does_not_return_content_from_swapped_symlink PASSED [ 75%]
+tests/test_sandbox.py::test_replaced_workspace_root_is_rejected[find] PASSED [ 76%]
+tests/test_sandbox.py::test_replaced_workspace_root_is_rejected[fingerprint] PASSED [ 76%]
+tests/test_sandbox.py::test_internal_read_symlink_retains_validated_target_behavior PASSED [ 77%]
+tests/test_sandbox.py::test_discovery_hides_sensitive_paths_and_symlinks PASSED [ 77%]
+tests/test_sandbox.py::test_find_and_literal_search_return_source_paths_and_line_numbers PASSED [ 78%]
+tests/test_sandbox.py::test_discovery_reports_truncated_results PASSED   [ 78%]
+tests/test_sandbox.py::test_search_enforces_total_read_budget_and_skips_binary PASSED [ 79%]
+tests/test_sandbox.py::test_discovery_calls_use_gate_and_do_not_replace_read_evidence PASSED [ 79%]
+tests/test_state_checkpoint.py::test_budget_extension_cli_preserves_progress_and_resumes_without_replaying_write PASSED [ 80%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits0] PASSED [ 80%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits1] PASSED [ 81%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits2] PASSED [ 81%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits3] PASSED [ 82%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits4] PASSED [ 82%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits5] PASSED [ 83%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits6] PASSED [ 83%]
+tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits7] PASSED [ 84%]
+tests/test_state_checkpoint.py::test_tool_call_budget_can_be_extended_without_resetting_seen_ids PASSED [ 84%]
+tests/test_state_checkpoint.py::test_budget_extension_blocks_workspace_drift[limits0] PASSED [ 85%]
+tests/test_state_checkpoint.py::test_budget_extension_blocks_workspace_drift[limits1] PASSED [ 85%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-pending] PASSED [ 86%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-denied] PASSED [ 86%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-completed] PASSED [ 87%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-unknown] PASSED [ 87%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-pending] PASSED [ 88%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-denied] PASSED [ 88%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-completed] PASSED [ 89%]
+tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-unknown] PASSED [ 89%]
+tests/test_state_checkpoint.py::test_host_review_closes_unknown_run_without_replaying_or_claiming_success PASSED [ 90%]
+tests/test_state_checkpoint.py::test_model_plan_is_updated_and_used_after_new_process_resume PASSED [ 90%]
+tests/test_state_checkpoint.py::test_workspace_drift_marks_saved_plan_for_review PASSED [ 91%]
+tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[action_result-6-None] PASSED [ 91%]
+tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-None] PASSED [ 92%]
+tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-8-None] PASSED [ 92%]
+tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[artifact_export-6-None] PASSED [ 93%]
+tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-report] PASSED [ 93%]
+tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-source] PASSED [ 94%]
+tests/test_state_checkpoint.py::test_state_and_checkpoint_preserve_business_fields PASSED [ 94%]
+tests/test_state_checkpoint.py::test_snapshot_can_be_loaded_in_new_process_without_resetting_counter PASSED [ 95%]
+tests/test_state_checkpoint.py::test_new_process_resumes_approved_write_without_reset_or_reexecution PASSED [ 95%]
+tests/test_state_checkpoint.py::test_crash_after_write_before_result_commit_becomes_unknown PASSED [ 96%]
+tests/test_state_checkpoint.py::test_workspace_changes_invalidate_old_approval_and_evidence PASSED [ 96%]
+tests/test_state_checkpoint.py::test_checkpoint_is_authoritative_if_state_view_is_outdated PASSED [ 97%]
+tests/test_state_checkpoint.py::test_stale_controller_cannot_overwrite_newer_decision PASSED [ 97%]
+tests/test_state_checkpoint.py::test_confirmed_write_is_not_replayed_after_exit_before_step_callback PASSED [ 98%]
+tests/test_state_checkpoint.py::test_external_change_between_approval_and_execution_blocks_write PASSED [ 98%]
+tests/test_state_checkpoint.py::test_concurrent_controller_is_rejected_by_process_lock PASSED [ 99%]
+tests/test_state_checkpoint.py::test_returned_rejection_is_durable_before_step_callback PASSED [ 99%]
+tests/test_state_checkpoint.py::test_resume_does_not_adopt_a_symlink_redirected_workspace PASSED [100%]
+
+- generated xml file: /workspace/regression/junit.xml -
+================================== 用例说明与断言清单 ===================================
+PASSED tests/test_audit.py::test_audit_appends_and_preserves_correlation_fields (0.001s)
+  验证：拒绝和成功请求均追加独立事件，原记录内容及公共关联字段保持完整。
+  ASSERT PASSED tests/test_audit.py:20: path.read_bytes().startswith(original)
+  ASSERT PASSED tests/test_audit.py:22: [record["event"] for record in records] == ["rejected", "allowed", "executed"]
+  ASSERT PASSED tests/test_audit.py:23: records[0]["tool_call_id"] == "bad-id"
+  ASSERT PASSED tests/test_audit.py:24: records[0]["toolCallId"] == "bad-id"
+  ASSERT PASSED tests/test_audit.py:25: all(record["run_id"] == "run-1" for record in records)
+  ASSERT PASSED tests/test_audit.py:26: all({"rule", "decision", "actor", "tool_call_id"} <= record.keys() for record in records)
+PASSED tests/test_audit.py::test_approval_and_execution_are_linked_by_original_call_id (0.025s)
+  验证：A2：宿主审批、Gate 放行和执行结果共享运行与原始调用标识。
+  ASSERT PASSED tests/test_audit.py:45: [item['event'] for item in linked] == ['preflight_checked', 'approval_requested', 'approval_decided', 'preflight_checked', 'allowed', 'executed']
+  ASSERT PASSED tests/test_audit.py:46: linked[2]['actor'] == 'reviewer-1'
+  ASSERT PASSED tests/test_audit.py:47: all(item['run_id'] == harness.state.run_id for item in linked)
+PASSED tests/test_audit.py::test_sensitive_symlink_denial_records_sandbox_and_gate (0.005s)
+  验证：S2/A1：真实落点指向敏感文件时，边界拒绝与 Gate 拒绝共享原调用 ID。
+  ASSERT PASSED tests/test_audit.py:63: result['error']['code'] == 'SANDBOX_DENIED'
+  ASSERT PASSED tests/test_audit.py:67: [(item['actor'], item['decision']) for item in linked] == [('sandbox', 'deny'), ('gate', 'deny')]
+PASSED tests/test_audit.py::test_runtime_discovery_boundary_denial_is_audited_and_persisted[list_files-arguments0] (0.016s)
+  验证：前置检查后替换根目录，执行检查仍拒绝，并保存 Sandbox 与 Gate 的拒绝链。
+  ASSERT PASSED tests/test_audit.py:103: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_audit.py:104: "PRIVATE_FIXTURE" not in state.steps[0]["observations"]
+  ASSERT PASSED tests/test_audit.py:105: marker.read_text() == "PRIVATE_FIXTURE = 1\n"
+  ASSERT PASSED tests/test_audit.py:108: any(row["actor"] == "sandbox" and row["decision"] == "deny" and row["rule"] == "execution_boundary" for row in linked)
+  ASSERT PASSED tests/test_audit.py:109: any(row["actor"] == "gate" and row["event"] == "rejected" and row["rule"] == "SANDBOX_DENIED" for row in linked)
+  ASSERT PASSED tests/test_audit.py:110: not any(row["event"] == "executed" for row in linked)
+  ASSERT PASSED tests/test_audit.py:112: saved == StateStore(harness.run_dir / "state.json").load()
+  ASSERT PASSED tests/test_audit.py:113: saved.actions["runtime-boundary"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_audit.py:114: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:116: recovered.state.actions["runtime-boundary"]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:117: recovered.state.steps_used == recovered.state.tool_calls_used == 1
+PASSED tests/test_audit.py::test_runtime_discovery_boundary_denial_is_audited_and_persisted[find_files-arguments1] (0.017s)
+  验证：前置检查后替换根目录，执行检查仍拒绝，并保存 Sandbox 与 Gate 的拒绝链。
+  ASSERT PASSED tests/test_audit.py:103: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_audit.py:104: "PRIVATE_FIXTURE" not in state.steps[0]["observations"]
+  ASSERT PASSED tests/test_audit.py:105: marker.read_text() == "PRIVATE_FIXTURE = 1\n"
+  ASSERT PASSED tests/test_audit.py:108: any(row["actor"] == "sandbox" and row["decision"] == "deny" and row["rule"] == "execution_boundary" for row in linked)
+  ASSERT PASSED tests/test_audit.py:109: any(row["actor"] == "gate" and row["event"] == "rejected" and row["rule"] == "SANDBOX_DENIED" for row in linked)
+  ASSERT PASSED tests/test_audit.py:110: not any(row["event"] == "executed" for row in linked)
+  ASSERT PASSED tests/test_audit.py:112: saved == StateStore(harness.run_dir / "state.json").load()
+  ASSERT PASSED tests/test_audit.py:113: saved.actions["runtime-boundary"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_audit.py:114: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:116: recovered.state.actions["runtime-boundary"]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:117: recovered.state.steps_used == recovered.state.tool_calls_used == 1
+PASSED tests/test_audit.py::test_runtime_discovery_boundary_denial_is_audited_and_persisted[search_code-arguments2] (0.016s)
+  验证：前置检查后替换根目录，执行检查仍拒绝，并保存 Sandbox 与 Gate 的拒绝链。
+  ASSERT PASSED tests/test_audit.py:103: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_audit.py:104: "PRIVATE_FIXTURE" not in state.steps[0]["observations"]
+  ASSERT PASSED tests/test_audit.py:105: marker.read_text() == "PRIVATE_FIXTURE = 1\n"
+  ASSERT PASSED tests/test_audit.py:108: any(row["actor"] == "sandbox" and row["decision"] == "deny" and row["rule"] == "execution_boundary" for row in linked)
+  ASSERT PASSED tests/test_audit.py:109: any(row["actor"] == "gate" and row["event"] == "rejected" and row["rule"] == "SANDBOX_DENIED" for row in linked)
+  ASSERT PASSED tests/test_audit.py:110: not any(row["event"] == "executed" for row in linked)
+  ASSERT PASSED tests/test_audit.py:112: saved == StateStore(harness.run_dir / "state.json").load()
+  ASSERT PASSED tests/test_audit.py:113: saved.actions["runtime-boundary"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_audit.py:114: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:116: recovered.state.actions["runtime-boundary"]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:117: recovered.state.steps_used == recovered.state.tool_calls_used == 1
+PASSED tests/test_audit.py::test_file_open_symlink_denial_is_classified_as_boundary (0.011s)
+  验证：实际 open 拒绝检查后替换的文件链接，不能退化成无法识别边界的普通执行失败。
+  ASSERT PASSED tests/test_audit.py:152: active["swapped"] and outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_audit.py:153: state.actions["file-swap"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_audit.py:154: state.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_audit.py:156: any(row["tool_call_id"] == "file-swap" and row["actor"] == "sandbox" and row["decision"] == "deny" for row in events)
+  ASSERT PASSED tests/test_audit.py:157: outside.read_text() == "PRIVATE_FIXTURE"
+PASSED tests/test_audit.py::test_side_effect_boundary_failure_retains_unknown_result[write_file] (0.019s)
+  验证：边界异常发生前已有写入或测试副作用时，只增加拒绝审计，不允许自动重放。
+  ASSERT PASSED tests/test_audit.py:183: state.approvals["uncertain"]["status"] == "CONSUMED"
+  ASSERT PASSED tests/test_audit.py:184: state.status == "WAITING_REVIEW" and state.stop_reason == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:185: state.actions["uncertain"]["status"] == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:186: state.rejections[0]["result"]["error"]["code"] == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:188: any(row["tool_call_id"] == "uncertain" and row["actor"] == "sandbox" and row["decision"] == "deny" for row in events)
+  ASSERT PASSED tests/test_audit.py:190: recovered.resume().stop_reason == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:191: len(recovered.state.writes) == (1 if name == "write_file" else 0)
+  ASSERT PASSED tests/test_audit.py:192: len(recovered.state.tests) == (1 if name == "run_test" else 0)
+PASSED tests/test_audit.py::test_side_effect_boundary_failure_retains_unknown_result[run_test] (0.232s)
+  验证：边界异常发生前已有写入或测试副作用时，只增加拒绝审计，不允许自动重放。
+  ASSERT PASSED tests/test_audit.py:184: state.status == "WAITING_REVIEW" and state.stop_reason == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:185: state.actions["uncertain"]["status"] == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:186: state.rejections[0]["result"]["error"]["code"] == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:188: any(row["tool_call_id"] == "uncertain" and row["actor"] == "sandbox" and row["decision"] == "deny" for row in events)
+  ASSERT PASSED tests/test_audit.py:190: recovered.resume().stop_reason == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_audit.py:191: len(recovered.state.writes) == (1 if name == "write_file" else 0)
+  ASSERT PASSED tests/test_audit.py:192: len(recovered.state.tests) == (1 if name == "run_test" else 0)
+PASSED tests/test_completion.py::test_final_answer_without_evidence_is_rejected (0.008s)
+  验证：没有读取证据时通过 Gate 提交答案应返回错误，且不生成报告。
+  ASSERT PASSED tests/test_completion.py:12: not result["ok"]
+  ASSERT PASSED tests/test_completion.py:13: result["tool_call_id"] == "final-1"
+  ASSERT PASSED tests/test_completion.py:14: "evidence" in result["error"]["message"]
+  ASSERT PASSED tests/test_completion.py:15: not (tmp_path / "run" / "report.md").exists()
+PASSED tests/test_completion.py::test_changing_source_invalidates_read_evidence (0.008s)
+  验证：读取完成后修改源码，旧内容哈希必须使完成检查失败。
+  ASSERT PASSED tests/test_completion.py:21: harness.gate.dispatch("read-1", "read_file", {"path": "calculator.py"})["ok"]
+PASSED tests/test_completion.py::test_empty_answer_is_rejected (0.005s)
+  验证：纯空白答复不满足最终答案的文本要求。
+PASSED tests/test_completion.py::test_passed_tests_become_stale_after_another_approved_write (0.718s)
+  验证：H2：通过后再修改源码，旧测试失效；当前版本重新执行通过后才能完成。
+  ASSERT PASSED tests/test_completion.py:47: harness.gate.execute_pending()['ok']
+  ASSERT PASSED tests/test_completion.py:48: harness.gate.dispatch('read-1', 'read_file', {'path': 'calculator.py'})['ok']
+  ASSERT PASSED tests/test_completion.py:49: harness.gate.dispatch('retest-1', 'run_test', {'name': 'unit'})['result']['status'] == 'PASSED'
+  ASSERT PASSED tests/test_completion.py:51: harness.gate.dispatch('report-1', 'write_report', {'content': report})['error']['code'] == 'APPROVAL_REQUIRED'
+  ASSERT PASSED tests/test_completion.py:53: harness.gate.execute_pending()['ok']
+  ASSERT PASSED tests/test_completion.py:70: harness.gate.dispatch('retest-2', 'run_test', {'name': 'unit'})['result']['status'] == 'PASSED'
+PASSED tests/test_completion.py::test_changed_report_artifact_cannot_use_old_approval (0.511s)
+  验证：报告在批准后发生变化时拒绝最终答案，不能仅检查文件是否存在。
+  ASSERT PASSED tests/test_completion.py:47: harness.gate.execute_pending()['ok']
+  ASSERT PASSED tests/test_completion.py:48: harness.gate.dispatch('read-1', 'read_file', {'path': 'calculator.py'})['ok']
+  ASSERT PASSED tests/test_completion.py:49: harness.gate.dispatch('retest-1', 'run_test', {'name': 'unit'})['result']['status'] == 'PASSED'
+  ASSERT PASSED tests/test_completion.py:51: harness.gate.dispatch('report-1', 'write_report', {'content': report})['error']['code'] == 'APPROVAL_REQUIRED'
+  ASSERT PASSED tests/test_completion.py:53: harness.gate.execute_pending()['ok']
+PASSED tests/test_completion.py::test_all_required_commands_must_pass (0.489s)
+  验证：只通过一个命令不能代替完整必测集合，缺失结果明确阻止完成。
+  ASSERT PASSED tests/test_completion.py:47: harness.gate.execute_pending()['ok']
+  ASSERT PASSED tests/test_completion.py:48: harness.gate.dispatch('read-1', 'read_file', {'path': 'calculator.py'})['ok']
+  ASSERT PASSED tests/test_completion.py:49: harness.gate.dispatch('retest-1', 'run_test', {'name': 'unit'})['result']['status'] == 'PASSED'
+  ASSERT PASSED tests/test_completion.py:51: harness.gate.dispatch('report-1', 'write_report', {'content': report})['error']['code'] == 'APPROVAL_REQUIRED'
+  ASSERT PASSED tests/test_completion.py:53: harness.gate.execute_pending()['ok']
+PASSED tests/test_completion.py::test_understanding_mode_rejects_source_write_capabilities (0.000s)
+  验证：代码理解模式在装配时拒绝源码写入白名单。
+PASSED tests/test_completion.py::test_latest_failed_result_cannot_reuse_an_earlier_pass (0.683s)
+  验证：相同代码和命令的最新结果失败时，旧通过记录不能满足必测条件。
+  ASSERT PASSED tests/test_completion.py:47: harness.gate.execute_pending()['ok']
+  ASSERT PASSED tests/test_completion.py:48: harness.gate.dispatch('read-1', 'read_file', {'path': 'calculator.py'})['ok']
+  ASSERT PASSED tests/test_completion.py:49: harness.gate.dispatch('retest-1', 'run_test', {'name': 'unit'})['result']['status'] == 'PASSED'
+  ASSERT PASSED tests/test_completion.py:51: harness.gate.dispatch('report-1', 'write_report', {'content': report})['error']['code'] == 'APPROVAL_REQUIRED'
+  ASSERT PASSED tests/test_completion.py:53: harness.gate.execute_pending()['ok']
+  ASSERT PASSED tests/test_completion.py:107: outcome['result']['status'] == 'FAILED'
+  ASSERT PASSED tests/test_completion.py:108: outcome['result']['valid']
+PASSED tests/test_gate.py::test_invalid_arguments_never_enter_handler[arguments0] (0.001s)
+  验证：参数缺失、额外字段或类型错误时保留调用 ID，并阻止 handler 执行。
+  ASSERT PASSED tests/test_gate.py:26: result["error"]["code"] == "INVALID_ARGUMENTS"
+  ASSERT PASSED tests/test_gate.py:27: result["tool_call_id"] == "original-id"
+PASSED tests/test_gate.py::test_invalid_arguments_never_enter_handler[arguments1] (0.000s)
+  验证：参数缺失、额外字段或类型错误时保留调用 ID，并阻止 handler 执行。
+  ASSERT PASSED tests/test_gate.py:26: result["error"]["code"] == "INVALID_ARGUMENTS"
+  ASSERT PASSED tests/test_gate.py:27: result["tool_call_id"] == "original-id"
+PASSED tests/test_gate.py::test_invalid_arguments_never_enter_handler[arguments2] (0.000s)
+  验证：参数缺失、额外字段或类型错误时保留调用 ID，并阻止 handler 执行。
+  ASSERT PASSED tests/test_gate.py:26: result["error"]["code"] == "INVALID_ARGUMENTS"
+  ASSERT PASSED tests/test_gate.py:27: result["tool_call_id"] == "original-id"
+PASSED tests/test_gate.py::test_invalid_arguments_never_enter_handler[None] (0.000s)
+  验证：参数缺失、额外字段或类型错误时保留调用 ID，并阻止 handler 执行。
+  ASSERT PASSED tests/test_gate.py:26: result["error"]["code"] == "INVALID_ARGUMENTS"
+  ASSERT PASSED tests/test_gate.py:27: result["tool_call_id"] == "original-id"
+PASSED tests/test_gate.py::test_invalid_arguments_never_enter_handler[a] (0.000s)
+  验证：参数缺失、额外字段或类型错误时保留调用 ID，并阻止 handler 执行。
+  ASSERT PASSED tests/test_gate.py:26: result["error"]["code"] == "INVALID_ARGUMENTS"
+  ASSERT PASSED tests/test_gate.py:27: result["tool_call_id"] == "original-id"
+PASSED tests/test_gate.py::test_third_identical_action_is_blocked (0.001s)
+  验证：使用不同调用 ID 重复相同动作，第三次应在 handler 执行前被拒绝。
+  ASSERT PASSED tests/test_gate.py:36: [result["ok"] for result in results] == [True, True, False]
+  ASSERT PASSED tests/test_gate.py:37: results[-1]["error"]["code"] == "REPEATED_ACTION"
+  ASSERT PASSED tests/test_gate.py:38: handler.call_count == 2
+PASSED tests/test_gate.py::test_same_call_id_is_not_executed_twice (0.001s)
+  验证：同一调用 ID 再次提交时不重复执行，独立于动作签名的连续计数规则。
+  ASSERT PASSED tests/test_gate.py:45: gate.dispatch("same-id", "read_file", {"path": "a"})["ok"]
+  ASSERT PASSED tests/test_gate.py:47: result["error"]["code"] == "DUPLICATE_CALL"
+PASSED tests/test_gate.py::test_different_invalid_request_breaks_consecutive_sequence[unknown-arguments0] (0.001s)
+  验证：G2：A、A、无效 B、A 不是连续三次 A，后续第三次 A 仍应被拦截。
+  ASSERT PASSED tests/test_gate.py:56: gate.dispatch('a1', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:57: gate.dispatch('a2', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:58: not gate.dispatch('b', name, arguments)['ok']
+  ASSERT PASSED tests/test_gate.py:59: gate.dispatch('a3', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:60: gate.dispatch('a4', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:61: gate.dispatch('a5', 'read_file', {'path': 'a'})['error']['code'] == 'REPEATED_ACTION'
+  ASSERT PASSED tests/test_gate.py:62: handler.call_count == 4
+PASSED tests/test_gate.py::test_different_invalid_request_breaks_consecutive_sequence[read_file-arguments1] (0.001s)
+  验证：G2：A、A、无效 B、A 不是连续三次 A，后续第三次 A 仍应被拦截。
+  ASSERT PASSED tests/test_gate.py:56: gate.dispatch('a1', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:57: gate.dispatch('a2', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:58: not gate.dispatch('b', name, arguments)['ok']
+  ASSERT PASSED tests/test_gate.py:59: gate.dispatch('a3', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:60: gate.dispatch('a4', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:61: gate.dispatch('a5', 'read_file', {'path': 'a'})['error']['code'] == 'REPEATED_ACTION'
+  ASSERT PASSED tests/test_gate.py:62: handler.call_count == 4
+PASSED tests/test_gate.py::test_different_invalid_request_breaks_consecutive_sequence[read_file-arguments2] (0.001s)
+  验证：G2：A、A、无效 B、A 不是连续三次 A，后续第三次 A 仍应被拦截。
+  ASSERT PASSED tests/test_gate.py:56: gate.dispatch('a1', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:57: gate.dispatch('a2', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:58: not gate.dispatch('b', name, arguments)['ok']
+  ASSERT PASSED tests/test_gate.py:59: gate.dispatch('a3', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:60: gate.dispatch('a4', 'read_file', {'path': 'a'})['ok']
+  ASSERT PASSED tests/test_gate.py:61: gate.dispatch('a5', 'read_file', {'path': 'a'})['error']['code'] == 'REPEATED_ACTION'
+  ASSERT PASSED tests/test_gate.py:62: handler.call_count == 4
+PASSED tests/test_gate.py::test_escape_is_blocked_before_handler (0.001s)
+  验证：在工作区外创建真实文件，验证 preflight 阻止越界请求进入 handler。
+  ASSERT PASSED tests/test_gate.py:72: result["error"]["code"] == "SANDBOX_DENIED"
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments0] (0.013s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments1] (0.011s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments2] (0.011s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments3] (0.011s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[list_files-arguments4] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments5] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments6] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments7] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[find_files-arguments8] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments9] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments10] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments11] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments12] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_discovery_denial_precedes_handler_and_is_durable[search_code-arguments13] (0.010s)
+  验证：发现工具的非法输入不进入 handler，原 ID、拒绝原因及预算在安全边界落盘。
+  ASSERT PASSED tests/test_gate.py:115: outcome["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_gate.py:116: outcome["tool_call_id"] == "denied-discovery"
+  ASSERT PASSED tests/test_gate.py:118: saved == StateStore(run_dir / "state.json").load()
+  ASSERT PASSED tests/test_gate.py:119: saved.actions["denied-discovery"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_gate.py:120: saved.rejections[0]["result"] == outcome
+  ASSERT PASSED tests/test_gate.py:121: saved.steps_used == saved.tool_calls_used == 1
+  ASSERT PASSED tests/test_gate.py:124: [(row["actor"], row["decision"]) for row in linked] == [("sandbox", "deny"), ("gate", "deny")]
+  ASSERT PASSED tests/test_gate.py:125: all(row["run_id"] == state.run_id and row["toolCallId"] == "denied-discovery" and row["rule"] for row in linked)
+PASSED tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments0] (0.005s)
+  验证：新增读取接口仍遵守 G1/S1，非法路径或范围不进入 handler。
+  ASSERT PASSED tests/test_gate.py:145: not outcome["ok"] and outcome["tool_call_id"] == "invalid-range"
+PASSED tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments1] (0.005s)
+  验证：新增读取接口仍遵守 G1/S1，非法路径或范围不进入 handler。
+  ASSERT PASSED tests/test_gate.py:145: not outcome["ok"] and outcome["tool_call_id"] == "invalid-range"
+PASSED tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments2] (0.005s)
+  验证：新增读取接口仍遵守 G1/S1，非法路径或范围不进入 handler。
+  ASSERT PASSED tests/test_gate.py:145: not outcome["ok"] and outcome["tool_call_id"] == "invalid-range"
+PASSED tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments3] (0.005s)
+  验证：新增读取接口仍遵守 G1/S1，非法路径或范围不进入 handler。
+  ASSERT PASSED tests/test_gate.py:145: not outcome["ok"] and outcome["tool_call_id"] == "invalid-range"
+PASSED tests/test_gate.py::test_range_permission_and_bounds_precede_handler[arguments4] (0.005s)
+  验证：新增读取接口仍遵守 G1/S1，非法路径或范围不进入 handler。
+  ASSERT PASSED tests/test_gate.py:145: not outcome["ok"] and outcome["tool_call_id"] == "invalid-range"
+PASSED tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[.] (0.000s)
+  验证：宿主目录范围也接受路径校验，不能以目录权限绕过敏感路径规则。
+  ASSERT PASSED tests/test_gate.py:157: not (tmp_path / "run").exists()
+PASSED tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[../] (0.000s)
+  验证：宿主目录范围也接受路径校验，不能以目录权限绕过敏感路径规则。
+  ASSERT PASSED tests/test_gate.py:157: not (tmp_path / "run").exists()
+PASSED tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[.git] (0.000s)
+  验证：宿主目录范围也接受路径校验，不能以目录权限绕过敏感路径规则。
+  ASSERT PASSED tests/test_gate.py:157: not (tmp_path / "run").exists()
+PASSED tests/test_gate.py::test_directory_permission_cannot_grant_root_sensitive_or_linked_paths[linked] (0.000s)
+  验证：宿主目录范围也接受路径校验，不能以目录权限绕过敏感路径规则。
+  ASSERT PASSED tests/test_gate.py:157: not (tmp_path / "run").exists()
+PASSED tests/test_gate.py::test_write_tools_are_not_enabled_in_read_only_configuration (0.000s)
+  验证：只读注册表不允许通过自报工具名称获得文件写入能力。
+  ASSERT PASSED tests/test_gate.py:163: result["error"]["code"] == "TOOL_NOT_ALLOWED"
+PASSED tests/test_gate.py::test_unapproved_write_pauses_without_entering_handler (0.010s)
+  验证：G3：待审批动作持久化，但 handler 调用次数和目标内容均保持不变。
+  ASSERT PASSED tests/test_gate.py:180: state.status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_gate.py:181: state.stop_reason == 'APPROVAL_REQUIRED'
+  ASSERT PASSED tests/test_gate.py:182: state.pending_action['tool_call_id'] == 'write-1'
+  ASSERT PASSED tests/test_gate.py:183: state.approvals['write-1']['status'] == 'PENDING'
+  ASSERT PASSED tests/test_gate.py:184: Checkpoint(tmp_path / 'run' / 'checkpoint.json').load().pending_action == state.pending_action
+  ASSERT PASSED tests/test_gate.py:185: (workspace / 'calculator.py').read_bytes() == original
+  ASSERT PASSED tests/test_gate.py:187: model.calls == 1
+PASSED tests/test_gate.py::test_approved_call_executes_once_and_replay_is_rejected (0.024s)
+  验证：G4：批准只允许原调用执行一次，模型重复提交不能再次进入 handler。
+  ASSERT PASSED tests/test_gate.py:209: (workspace / 'calculator.py').read_text() != content
+  ASSERT PASSED tests/test_gate.py:211: state.status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_gate.py:212: state.steps_used == 3
+  ASSERT PASSED tests/test_gate.py:213: state.tool_calls_used == 3
+  ASSERT PASSED tests/test_gate.py:214: state.approvals['write-1']['status'] == 'CONSUMED'
+  ASSERT PASSED tests/test_gate.py:215: (workspace / 'calculator.py').read_text() == content
+  ASSERT PASSED tests/test_gate.py:217: result['error']['code'] == 'DUPLICATE_CALL'
+  ASSERT PASSED tests/test_gate.py:218: harness.state.actions['write-1']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_gate.py:219: harness.state.actions['write-1']['result']['ok']
+  ASSERT PASSED tests/test_gate.py:220: harness.state.approvals['write-1']['status'] == 'CONSUMED'
+PASSED tests/test_gate.py::test_rejection_persistence_failure_is_not_reported_as_a_committed_result (0.000s)
+  验证：拒绝状态提交失败时向宿主报告错误，不返回仿佛已持久化的业务结果。
+PASSED tests/test_gate.py::test_approval_denial_stops_without_write (0.010s)
+  验证：显式拒绝审批终止运行，不把拒绝结果解释为允许执行。
+  ASSERT PASSED tests/test_gate.py:244: harness.state.status == 'STOPPED'
+  ASSERT PASSED tests/test_gate.py:245: harness.state.stop_reason == 'APPROVAL_DENIED'
+  ASSERT PASSED tests/test_gate.py:246: (workspace / 'calculator.py').read_bytes() == original
+PASSED tests/test_gate.py::test_write_path_outside_explicit_allowlist_never_requests_approval (0.005s)
+  验证：路径权限先于审批检查，不允许借审批扩大写入能力。
+  ASSERT PASSED tests/test_gate.py:258: result['error']['code'] == 'SANDBOX_DENIED'
+  ASSERT PASSED tests/test_gate.py:259: not harness.state.approvals
+  ASSERT PASSED tests/test_gate.py:260: not harness.state.writes
+PASSED tests/test_gate.py::test_approval_cannot_be_reused_with_modified_parameters (0.010s)
+  验证：审批签名绑定原始工具参数，审批前修改动作内容会被拒绝。
+  ASSERT PASSED tests/test_gate.py:274: not harness.state.writes
+PASSED tests/test_gate.py::test_run_test_outside_configuration_never_enters_handler (0.005s)
+  验证：S3：Gate 调用前置命令校验，非法别名不进入测试 handler。
+  ASSERT PASSED tests/test_gate.py:288: outcome['error']['code'] == 'SANDBOX_DENIED'
+  ASSERT PASSED tests/test_gate.py:289: not harness.state.tests
+PASSED tests/test_gate.py::test_repair_write_requires_real_initial_failure (0.005s)
+  验证：修复任务不能跳过初始测试直接修改文件，预检查失败不请求审批。
+  ASSERT PASSED tests/test_gate.py:300: outcome['error']['code'] == 'SANDBOX_DENIED'
+  ASSERT PASSED tests/test_gate.py:301: 'initial failure' in outcome['error']['message']
+  ASSERT PASSED tests/test_gate.py:302: not harness.state.approvals
+PASSED tests/test_gate.py::test_exhausted_budget_does_not_reopen_a_successful_run (0.014s)
+  验证：终态优先于预算检查，额外调用不能把已成功运行改写为预算停止。
+  ASSERT PASSED tests/test_gate.py:315: harness.run('Read source').status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_gate.py:317: outcome['error']['code'] == 'RUN_NOT_ACTIVE'
+  ASSERT PASSED tests/test_gate.py:318: harness.state.status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_gate.py:319: harness.state.tool_calls_used == 2
+PASSED tests/test_gate.py::test_report_revision_interface_cannot_resume_denied_source_write (0.011s)
+  验证：报告退回接口不能扩大到源码写入，也不能使被拒绝的写入重新进入执行。
+  ASSERT PASSED tests/test_gate.py:332: harness.state.status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_gate.py:336: not harness.state.writes
+PASSED tests/test_harness_loop.py::test_production_entry_has_no_scripted_model (0.273s)
+  验证：正式入口只暴露真实模型，离线响应替身属于测试依赖。
+  ASSERT PASSED tests/test_harness_loop.py:22: "--script" not in result.stdout
+  ASSERT PASSED tests/test_harness_loop.py:23: "fake" not in result.stdout
+  ASSERT PASSED tests/test_harness_loop.py:24: not hasattr(module, "FakeModel")
+PASSED tests/test_harness_loop.py::test_real_profile_runs_task_and_approval_needs_no_credential (0.037s)
+  验证：宿主配置启动真实协议，审批不依赖凭据或固定响应脚本，恢复沿用原配置。
+  ASSERT PASSED tests/test_harness_loop.py:44: state["status"] == "WAITING_APPROVAL"
+  ASSERT PASSED tests/test_harness_loop.py:45: state["max_steps"] == 6 and state["model_config"]["model_id"] == "profile-model"
+  ASSERT PASSED tests/test_harness_loop.py:49: len(transport.requests) == requests_before
+  ASSERT PASSED tests/test_harness_loop.py:51: command("resume", "--run-dir", str(run_dir))["status"] == "SUCCEEDED"
+PASSED tests/test_harness_loop.py::test_directory_permission_and_hash_bound_edit_still_require_approval (0.029s)
+  验证：模型可在宿主授权目录中选择文件，但准确补丁必须审批，旧哈希不能覆盖新内容。
+  ASSERT PASSED tests/test_harness_loop.py:69: harness.run("Update the configured package").status == "WAITING_APPROVAL"
+  ASSERT PASSED tests/test_harness_loop.py:70: target.read_text() == "VALUE = 1\n"
+  ASSERT PASSED tests/test_harness_loop.py:73: state.status == "SUCCEEDED" and target.read_text() == "VALUE = 2\n"
+  ASSERT PASSED tests/test_harness_loop.py:74: state.actions["stale-edit"]["result"]["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_harness_loop.py:75: len(state.writes) == 1
+PASSED tests/test_harness_loop.py::test_large_source_range_is_verified_and_can_complete (0.023s)
+  验证：大文件按行读取形成可核对的完整文件哈希证据，仍需批准报告才能完成。
+  ASSERT PASSED tests/test_harness_loop.py:88: state.status == "WAITING_APPROVAL"
+  ASSERT PASSED tests/test_harness_loop.py:90: result["total_lines"] == 9000 and result["content"].count("VALUE = 1") == 11
+  ASSERT PASSED tests/test_harness_loop.py:91: state.evidence[0]["start_line"] == 100
+  ASSERT PASSED tests/test_harness_loop.py:93: harness.resume().status == "SUCCEEDED"
+PASSED tests/test_harness_loop.py::test_context_keeps_recent_tool_pairs_without_losing_durable_evidence (0.036s)
+  验证：上下文只保留装得下的完整动作组，完整读取证据及动作仍保存在运行状态中。
+  ASSERT PASSED tests/test_harness_loop.py:101: len(self.last_context) <= 70000
+  ASSERT PASSED tests/test_harness_loop.py:101: len(self.last_context) <= 70000
+  ASSERT PASSED tests/test_harness_loop.py:101: len(self.last_context) <= 70000
+  ASSERT PASSED tests/test_harness_loop.py:101: len(self.last_context) <= 70000
+  ASSERT PASSED tests/test_harness_loop.py:111: state.status == "SUCCEEDED" and len(state.evidence) == 3
+  ASSERT PASSED tests/test_harness_loop.py:112: len(state.steps) == 4 and "A" * 1000 not in model.last_context and "C" * 1000 in model.last_context
+PASSED tests/test_harness_loop.py::test_interactive_mode_approves_exact_report_and_keeps_json_clean (0.035s)
+  验证：终端审批由宿主输入触发，提示和预览写 stderr，JSON 输出仍可解析。
+  ASSERT PASSED tests/test_harness_loop.py:126: state["status"] == "SUCCEEDED" and state["approvals"]["report"]["status"] == "CONSUMED"
+  ASSERT PASSED tests/test_harness_loop.py:127: "calculator.py defines addition." in captured.err and "Approve" in captured.err
+PASSED tests/test_harness_loop.py::test_host_cancel_request_blocks_next_tool_and_explicit_resume_preserves_budget (0.035s)
+  验证：取消请求通过宿主控制文件传递，生成中的模型答复不能在取消后执行工具。
+  ASSERT PASSED tests/test_harness_loop.py:144: state.status == "STOPPED" and state.stop_reason == "CANCELLED"
+  ASSERT PASSED tests/test_harness_loop.py:145: not state.evidence and state.steps_used == 1
+  ASSERT PASSED tests/test_harness_loop.py:151: recovered.resume().status == "WAITING_APPROVAL"
+  ASSERT PASSED tests/test_harness_loop.py:153: recovered.resume().status == "SUCCEEDED"
+  ASSERT PASSED tests/test_harness_loop.py:154: recovered.state.steps_used == 4
+PASSED tests/test_harness_loop.py::test_host_profile_rejects_secret_fields_and_ambiguous_permission_types[profile0] (0.000s)
+  验证：配置仅接收公开字段及明确列表，避免凭据落盘和字符串被拆成目录授权。
+PASSED tests/test_harness_loop.py::test_host_profile_rejects_secret_fields_and_ambiguous_permission_types[profile1] (0.000s)
+  验证：配置仅接收公开字段及明确列表，避免凭据落盘和字符串被拆成目录授权。
+PASSED tests/test_harness_loop.py::test_host_profile_rejects_secret_fields_and_ambiguous_permission_types[profile2] (0.000s)
+  验证：配置仅接收公开字段及明确列表，避免凭据落盘和字符串被拆成目录授权。
+PASSED tests/test_harness_loop.py::test_workspace_configuration_cannot_grant_itself_permissions (0.000s)
+  验证：未提供用例说明
+PASSED tests/test_harness_loop.py::test_oversized_latest_context_stops_with_explicit_reason (0.013s)
+  验证：最新工具结果不能完整放入上下文时停止，不丢失结果后继续猜测或伪装完成。
+  ASSERT PASSED tests/test_harness_loop.py:180: state.status == "STOPPED" and state.stop_reason == "CONTEXT_LIMIT"
+  ASSERT PASSED tests/test_harness_loop.py:181: model.calls == 1 and state.actions["read"]["status"] == "SUCCEEDED"
+PASSED tests/test_harness_loop.py::test_initial_plan_tracks_real_repair_evidence (0.530s)
+  验证：实际失败、审批、写入及重测推进初始计划，不额外占用模型步骤。
+  ASSERT PASSED tests/test_harness_loop.py:199: state.plan and state.plan_cursor == 2
+  ASSERT PASSED tests/test_harness_loop.py:200: state.plan_source == "harness" and state.plan_status == "PAUSED"
+  ASSERT PASSED tests/test_harness_loop.py:203: state.plan_cursor == 5
+  ASSERT PASSED tests/test_harness_loop.py:206: state.status == "SUCCEEDED"
+  ASSERT PASSED tests/test_harness_loop.py:207: state.plan_cursor == len(state.plan) and state.plan_status == "COMPLETED"
+  ASSERT PASSED tests/test_harness_loop.py:208: state.steps_used == 7
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps0-0] (0.011s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps1-0] (0.010s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps2-0] (0.009s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps3-0] (0.009s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps4-0] (0.009s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps5--1] (0.009s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps6-1] (0.009s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_invalid_plan_never_changes_business_state[steps7-True] (0.009s)
+  验证：非法计划在 Gate 及 preflight 拦截，不覆盖已保存的计划，也不产生审批。
+  ASSERT PASSED tests/test_harness_loop.py:217: state.plan_source == "harness" and state.plan_revision == 1
+  ASSERT PASSED tests/test_harness_loop.py:218: state.actions["invalid-plan"]["status"] == "REJECTED"
+  ASSERT PASSED tests/test_harness_loop.py:219: state.plan_cursor == 0 and not state.approvals
+PASSED tests/test_harness_loop.py::test_model_plan_cannot_replace_completion_evidence (0.012s)
+  验证：模型把计划推进到最后一步也不能绕过报告、读取或最终验收。
+  ASSERT PASSED tests/test_harness_loop.py:229: state.status == "STOPPED" and state.plan_status == "PAUSED"
+  ASSERT PASSED tests/test_harness_loop.py:230: state.plan == ["Read", "Deliver"] and state.plan_cursor == 1
+  ASSERT PASSED tests/test_harness_loop.py:231: state.plan_source == "model" and state.plan_revision == 2
+  ASSERT PASSED tests/test_harness_loop.py:232: not state.actions["final"]["result"]["ok"]
+PASSED tests/test_harness_loop.py::test_default_api_requires_approved_report (0.013s)
+  验证：H1：未指定任务类型时使用严格理解模式，读取证据不足以替代独立交付物。
+  ASSERT PASSED tests/test_harness_loop.py:243: state.task_kind == 'understand'
+  ASSERT PASSED tests/test_harness_loop.py:244: (state.status, state.stop_reason) == ('STOPPED', 'MAX_STEPS')
+  ASSERT PASSED tests/test_harness_loop.py:245: 'report.md' in state.actions['final']['result']['error']['message']
+  ASSERT PASSED tests/test_harness_loop.py:246: not (harness.run_dir / 'report.md').exists()
+PASSED tests/test_harness_loop.py::test_offline_driver_keeps_strict_defaults_and_rejects_general (0.564s)
+  验证：测试驱动保留严格任务验收，不能用兼容模式替代正式任务。
+  ASSERT PASSED tests/test_harness_loop.py:264: state['task_kind'] == 'understand'
+  ASSERT PASSED tests/test_harness_loop.py:265: state['status'] == 'STOPPED'
+  ASSERT PASSED tests/test_harness_loop.py:266: 'report.md' in state['actions']['final']['result']['error']['message']
+  ASSERT PASSED tests/test_harness_loop.py:268: rejected.returncode == 2
+  ASSERT PASSED tests/test_harness_loop.py:269: 'invalid choice' in rejected.stderr
+PASSED tests/test_harness_loop.py::test_real_agent_loop_reads_then_finishes (0.015s)
+  验证：验证读取、最终答复、报告和审计均属于同一次实际 Agent 运行。
+  ASSERT PASSED tests/test_harness_loop.py:280: state.status == "SUCCEEDED"
+  ASSERT PASSED tests/test_harness_loop.py:281: model.calls == 2
+  ASSERT PASSED tests/test_harness_loop.py:282: state.tool_calls_used == 2
+  ASSERT PASSED tests/test_harness_loop.py:283: state.steps_used == 2
+  ASSERT PASSED tests/test_harness_loop.py:284: (run_dir / "report.md").read_text().strip() == state.answer
+  ASSERT PASSED tests/test_harness_loop.py:285: StateStore(run_dir / "state.json").load().stop_reason == "COMPLETED"
+  ASSERT PASSED tests/test_harness_loop.py:287: {record["tool_call_id"] for record in audit if record["event"] == "executed"} == {"read-1", "answer-1"}
+PASSED tests/test_harness_loop.py::test_denial_is_returned_to_model_and_next_step_can_continue (0.016s)
+  验证：路径拒绝作为工具观察返回，后续有效调用仍可完成只读任务。
+  ASSERT PASSED tests/test_harness_loop.py:298: state.status == "SUCCEEDED"
+  ASSERT PASSED tests/test_harness_loop.py:300: observation["tool_call_id"] == "bad-1"
+  ASSERT PASSED tests/test_harness_loop.py:301: observation["error"]["code"] == "SANDBOX_DENIED"
+  ASSERT PASSED tests/test_harness_loop.py:302: len(state.evidence) == 1
+PASSED tests/test_harness_loop.py::test_step_budget_stops_without_extra_model_request (0.010s)
+  验证：预算耗尽时不追加收尾模型请求，也不触发成功状态或生成报告。
+  ASSERT PASSED tests/test_harness_loop.py:312: state.status == "STOPPED"
+  ASSERT PASSED tests/test_harness_loop.py:313: state.stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_harness_loop.py:314: state.answer is None
+  ASSERT PASSED tests/test_harness_loop.py:315: state.artifact is None
+  ASSERT PASSED tests/test_harness_loop.py:316: model.calls == 1
+PASSED tests/test_harness_loop.py::test_generation_failure_is_saved_before_raising (0.009s)
+  验证：模型生成异常向外传播前保存 FAILED 状态。
+  ASSERT PASSED tests/test_harness_loop.py:327: StateStore(run_dir / "state.json").load().status == "FAILED"
+PASSED tests/test_harness_loop.py::test_write_and_other_calls_in_same_step_are_all_rejected (0.017s)
+  验证：需审批动作不与其他调用共用步骤，避免暂停时产生未记录的部分批次。
+  ASSERT PASSED tests/test_harness_loop.py:343: state.status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:345: all(item['error']['code'] == 'PROTECTED_BATCH' for item in rejected)
+  ASSERT PASSED tests/test_harness_loop.py:346: not state.approvals
+  ASSERT PASSED tests/test_harness_loop.py:347: not state.writes
+  ASSERT PASSED tests/test_harness_loop.py:348: (workspace / 'calculator.py').read_bytes() == original
+PASSED tests/test_harness_loop.py::test_unresolved_approval_does_not_consume_more_model_budget (0.010s)
+  验证：未审批时多次请求继续保持等待，不再调用模型或清零预算。
+  ASSERT PASSED tests/test_harness_loop.py:357: harness.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:357: harness.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:358: model.calls == 1
+  ASSERT PASSED tests/test_harness_loop.py:359: harness.state.steps_used == 1
+  ASSERT PASSED tests/test_harness_loop.py:360: harness.state.tool_calls_used == 1
+PASSED tests/test_harness_loop.py::test_command_line_approval_and_resume_use_separate_processes (1.142s)
+  验证：命令行接口跨四个进程完成创建、批准、恢复与状态读取。
+  ASSERT PASSED tests/test_harness_loop.py:385: pending['status'] == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:387: approved['approvals']['report-cli']['status'] == 'APPROVED'
+  ASSERT PASSED tests/test_harness_loop.py:388: not (run_dir / 'report.md').exists()
+  ASSERT PASSED tests/test_harness_loop.py:390: complete['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:391: not complete['writes']
+  ASSERT PASSED tests/test_harness_loop.py:393: status == complete
+  ASSERT PASSED tests/test_harness_loop.py:394: (run_dir / 'report.md').read_text() == content
+  ASSERT PASSED tests/test_harness_loop.py:395: (workspace / 'calculator.py').read_bytes() == original
+PASSED tests/test_harness_loop.py::test_understanding_task_requires_approved_report_artifact (0.028s)
+  验证：H1：没有独立交付物时拒绝完成；报告批准后继续完成，目标源码不变。
+  ASSERT PASSED tests/test_harness_loop.py:410: state.status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:411: not (tmp_path / 'run' / 'report.md').exists()
+  ASSERT PASSED tests/test_harness_loop.py:412: 'report.md' in state.actions['early-final']['result']['error']['message']
+  ASSERT PASSED tests/test_harness_loop.py:414: harness.resume().status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:415: (tmp_path / 'run' / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_harness_loop.py:416: not harness.state.writes
+  ASSERT PASSED tests/test_harness_loop.py:417: (workspace / 'calculator.py').read_bytes() == original
+PASSED tests/test_harness_loop.py::test_repair_task_runs_real_failure_fix_retest_and_artifact (0.520s)
+  验证：完整修复路径：真实失败、批准写入、当前版本重测、批准报告及最终验收。
+  ASSERT PASSED tests/test_harness_loop.py:435: harness.run('Fix add').pending_action['tool_call_id'] == 'fix'
+  ASSERT PASSED tests/test_harness_loop.py:436: harness.state.tests[0]['status'] == 'FAILED'
+  ASSERT PASSED tests/test_harness_loop.py:438: harness.resume().pending_action['tool_call_id'] == 'report'
+  ASSERT PASSED tests/test_harness_loop.py:439: harness.state.tests[-1]['status'] == 'PASSED'
+  ASSERT PASSED tests/test_harness_loop.py:442: state.status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:443: state.steps_used == 6
+  ASSERT PASSED tests/test_harness_loop.py:444: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_harness_loop.py:445: '-def add(a,b): return a - b' in (run_dir / 'changes.patch').read_text()
+  ASSERT PASSED tests/test_harness_loop.py:446: '+def add(a,b): return a + b' in (run_dir / 'changes.patch').read_text()
+  ASSERT PASSED tests/test_harness_loop.py:448: [result['status'] for result in results] == ['FAILED', 'PASSED']
+  ASSERT PASSED tests/test_harness_loop.py:449: not results[0]['valid']
+  ASSERT PASSED tests/test_harness_loop.py:450: results[1]['valid']
+  ASSERT PASSED tests/test_harness_loop.py:451: results[1]['fingerprint_after'] == state.workspace_fingerprint
+PASSED tests/test_harness_loop.py::test_tool_call_budget_stops_without_claiming_completion (0.014s)
+  验证：H3：工具调用预算耗尽后立即退出，不消费后续模型响应或生成报告。
+  ASSERT PASSED tests/test_harness_loop.py:462: state.status == 'STOPPED'
+  ASSERT PASSED tests/test_harness_loop.py:463: state.stop_reason == 'MAX_TOOL_CALLS'
+  ASSERT PASSED tests/test_harness_loop.py:464: state.tool_calls_used == 1
+  ASSERT PASSED tests/test_harness_loop.py:465: not (tmp_path / 'run' / 'report.md').exists()
+PASSED tests/test_harness_loop.py::test_test_command_mutating_source_invalidates_workspace (0.142s)
+  验证：测试进程修改源码时不能被当作批准写入，立即转入工作区核对状态。
+  ASSERT PASSED tests/test_harness_loop.py:476: state.status == 'WAITING_REVIEW'
+  ASSERT PASSED tests/test_harness_loop.py:477: state.stop_reason == 'WORKSPACE_CHANGED'
+  ASSERT PASSED tests/test_harness_loop.py:478: not state.tests[-1]['valid']
+  ASSERT PASSED tests/test_harness_loop.py:479: not (tmp_path / 'run' / 'report.md').exists()
+PASSED tests/test_harness_loop.py::test_controller_cancellation_stops_test_and_model_loop (0.150s)
+  验证：宿主取消会停止测试进程及后续模型调用，持久化明确停止原因。
+  ASSERT PASSED tests/test_harness_loop.py:496: harness.state.active_process is not None
+  ASSERT PASSED tests/test_harness_loop.py:499: state.status == 'STOPPED'
+  ASSERT PASSED tests/test_harness_loop.py:500: state.stop_reason == 'CANCELLED'
+  ASSERT PASSED tests/test_harness_loop.py:501: state.tests[-1]['status'] == 'CANCELLED'
+  ASSERT PASSED tests/test_harness_loop.py:502: state.active_process is None
+  ASSERT PASSED tests/test_harness_loop.py:503: model.calls == 1
+PASSED tests/test_harness_loop.py::test_repair_cli_restores_command_policy_and_test_evidence (1.924s)
+  验证：修复任务跨独立进程恢复，仍执行持久化的命令策略并生成完整证据产物。
+  ASSERT PASSED tests/test_harness_loop.py:520: start['tests'][0]['status'] == 'FAILED'
+  ASSERT PASSED tests/test_harness_loop.py:523: verified['status'] == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:524: verified['tests'][-1]['status'] == 'PASSED'
+  ASSERT PASSED tests/test_harness_loop.py:527: finished['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:528: finished['test_commands'] == unit_commands
+  ASSERT PASSED tests/test_harness_loop.py:529: finished['steps_used'] == 6
+  ASSERT PASSED tests/test_harness_loop.py:530: all((run_dir / name).is_file() for name in ('report.md', 'test-results.json', 'changes.patch', 'audit.jsonl', 'checkpoint.json'))
+  ASSERT PASSED tests/test_harness_loop.py:533: all(item['run_id'] == finished['run_id'] for item in events)
+  ASSERT PASSED tests/test_harness_loop.py:534: {'gate', 'sandbox', 'state', 'operator'} <= {item['actor'] for item in events}
+  ASSERT PASSED tests/test_harness_loop.py:535: all(item['tool_call_id'] == item['toolCallId'] for item in events)
+  ASSERT PASSED tests/test_harness_loop.py:539: action['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:540: any(item['event'] == 'preflight_checked' and item['decision'] == 'allow' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:541: any(item['event'] == 'executed' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:539: action['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:540: any(item['event'] == 'preflight_checked' and item['decision'] == 'allow' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:541: any(item['event'] == 'executed' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:539: action['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:540: any(item['event'] == 'preflight_checked' and item['decision'] == 'allow' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:541: any(item['event'] == 'executed' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:539: action['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:540: any(item['event'] == 'preflight_checked' and item['decision'] == 'allow' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:541: any(item['event'] == 'executed' for item in linked)
+  ASSERT PASSED tests/test_harness_loop.py:542: any(item['event'] == 'checkpoint_saved' and item['revision'] == finished['revision'] for item in events)
+  ASSERT PASSED tests/test_harness_loop.py:544: any(item['event'] == 'process_finished' and item['tool_call_id'] == test['tool_call_id']                    and item['decision'] == test['status'] for item in events)
+  ASSERT PASSED tests/test_harness_loop.py:544: any(item['event'] == 'process_finished' and item['tool_call_id'] == test['tool_call_id']                    and item['decision'] == test['status'] for item in events)
+PASSED tests/test_harness_loop.py::test_keyboard_interrupt_terminates_running_cli_test (0.427s)
+  验证：真实 SIGINT 使 CLI 停止，并用子进程 FIFO EOF 验证测试已真实终止。
+  ASSERT PASSED tests/test_harness_loop.py:578: started
+  ASSERT PASSED tests/test_harness_loop.py:581: process.returncode != 0
+  ASSERT PASSED tests/test_harness_loop.py:583: state.stop_reason == 'CANCELLED'
+  ASSERT PASSED tests/test_harness_loop.py:587: os.read(descriptor, 1) == b''
+PASSED tests/test_harness_loop.py::test_host_can_return_report_for_revision_without_writing_it (0.035s)
+  验证：退回报告只提交反馈，不写入原内容；模型修订后仍需再次批准。
+  ASSERT PASSED tests/test_harness_loop.py:611: harness.state.stop_reason == 'REPORT_REVISION_REQUIRED'
+  ASSERT PASSED tests/test_harness_loop.py:612: not (tmp_path / 'run' / 'report.md').exists()
+  ASSERT PASSED tests/test_harness_loop.py:613: harness.resume().pending_action['tool_call_id'] == 'report-new'
+  ASSERT PASSED tests/test_harness_loop.py:614: 'Clarify Python runtime type behavior.' in harness.state.steps[1]['observations']
+  ASSERT PASSED tests/test_harness_loop.py:615: harness.state.approvals['report-old']['status'] == 'REVISION_REQUESTED'
+  ASSERT PASSED tests/test_harness_loop.py:616: not (tmp_path / 'run' / 'report.md').exists()
+  ASSERT PASSED tests/test_harness_loop.py:618: harness.resume().status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:619: harness.state.steps_used == 4
+  ASSERT PASSED tests/test_harness_loop.py:620: 'without runtime type checks' in (tmp_path / 'run' / 'report.md').read_text()
+PASSED tests/test_harness_loop.py::test_protected_batch_honors_call_budget (0.010s)
+  验证：H3：批量调用超过工具预算时应按工具预算停止，不能全部漏记。
+  ASSERT PASSED tests/test_harness_loop.py:638: state.stop_reason == 'MAX_TOOL_CALLS'
+  ASSERT PASSED tests/test_harness_loop.py:639: state.tool_calls_used == 1
+  ASSERT PASSED tests/test_harness_loop.py:640: model.calls == 1
+  ASSERT PASSED tests/test_harness_loop.py:641: {'write', 'read'} <= set(state.seen_call_ids)
+  ASSERT PASSED tests/test_harness_loop.py:642: len(state.rejections) == 2
+PASSED tests/test_harness_loop.py::test_duplicate_id_in_protected_batch_restores_each_rejection (0.016s)
+  验证：批次内重复 ID 的两个拒绝按步骤位置恢复，不覆盖首次意图或合并观察。
+  ASSERT PASSED tests/test_harness_loop.py:651: state.tool_calls_used == 2
+  ASSERT PASSED tests/test_harness_loop.py:652: not state.approvals and not state.writes
+  ASSERT PASSED tests/test_harness_loop.py:655: [outcome['error']['code'] for outcome in outcomes] == ['PROTECTED_BATCH', 'DUPLICATE_CALL']
+  ASSERT PASSED tests/test_harness_loop.py:656: recovered.state.actions['same-id']['result']['error']['code'] == 'PROTECTED_BATCH'
+PASSED tests/test_harness_loop.py::test_adapter_serializes_tools_and_parses_original_call_id (0.005s)
+  验证：复用 smolagents schema，保留工具调用 ID 并记录服务端 token 用量。
+  ASSERT PASSED tests/test_harness_loop.py:738: message.tool_calls[0].id == 'read'
+  ASSERT PASSED tests/test_harness_loop.py:739: message.token_usage.input_tokens == 10
+  ASSERT PASSED tests/test_harness_loop.py:741: request['endpoint'] == 'https://api.deepseek.com/chat/completions'
+  ASSERT PASSED tests/test_harness_loop.py:742: request['headers']['Authorization'] == 'Bearer [REDACTED_SECRET]'
+  ASSERT PASSED tests/test_harness_loop.py:743: request['json']['thinking'] == {'type': 'disabled'}
+  ASSERT PASSED tests/test_harness_loop.py:744: request['json']['tools']
+  ASSERT PASSED tests/test_harness_loop.py:745: not request['allow_redirects']
+  ASSERT PASSED tests/test_harness_loop.py:746: not request['trust_env']
+PASSED tests/test_harness_loop.py::test_real_adapter_drives_guarded_loop_without_persisting_secret (0.030s)
+  验证：适配器驱动实际 Agent 循环并恢复报告审批，业务记录不包含认证值。
+  ASSERT PASSED tests/test_harness_loop.py:759: harness.run('Explain addition').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:761: harness.resume().status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:762: harness.state.input_tokens == 40
+  ASSERT PASSED tests/test_harness_loop.py:763: harness.state.output_tokens == 8
+  ASSERT PASSED tests/test_harness_loop.py:766: 'test-only-secret' not in path.read_text()
+  ASSERT PASSED tests/test_harness_loop.py:766: 'test-only-secret' not in path.read_text()
+  ASSERT PASSED tests/test_harness_loop.py:766: 'test-only-secret' not in path.read_text()
+  ASSERT PASSED tests/test_harness_loop.py:766: 'test-only-secret' not in path.read_text()
+  ASSERT PASSED tests/test_harness_loop.py:766: 'test-only-secret' not in path.read_text()
+PASSED tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[https://user:password@example.com] (0.000s)
+  验证：不允许将凭据嵌入可持久化接口地址。
+PASSED tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[https://example.com?api_key=secret] (0.000s)
+  验证：不允许将凭据嵌入可持久化接口地址。
+PASSED tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[https://example.com#secret] (0.000s)
+  验证：不允许将凭据嵌入可持久化接口地址。
+PASSED tests/test_harness_loop.py::test_config_rejects_urls_containing_credentials_or_non_http_scheme[file:///tmp/model] (0.000s)
+  验证：不允许将凭据嵌入可持久化接口地址。
+PASSED tests/test_harness_loop.py::test_environment_overrides_explicit_file_without_modifying_global_environment (0.001s)
+  验证：进程变量优先于 dotenv，解析不修改全局环境或将值写入公开配置。
+  ASSERT PASSED tests/test_harness_loop.py:782: values['DEEPSEEK_API_KEY'] == 'process-value'
+  ASSERT PASSED tests/test_harness_loop.py:783: values['DEEPSEEK_MODEL'] == 'file-model'
+  ASSERT PASSED tests/test_harness_loop.py:785: 'process-value' not in json.dumps(config.public_dict())
+  ASSERT PASSED tests/test_harness_loop.py:786: 'file-value' not in json.dumps(config.public_dict())
+PASSED tests/test_harness_loop.py::test_saved_model_configuration_cannot_be_redirected_on_resume (0.000s)
+  验证：恢复使用原接口、模型及请求预算，显式切换目标必须创建新运行。
+  ASSERT PASSED tests/test_harness_loop.py:792: resolve_config('deepseek', {'DEEPSEEK_BASE_URL': 'https://different.example'}, saved=saved).public_dict() == saved
+PASSED tests/test_harness_loop.py::test_missing_credential_is_reported_by_variable_name (0.000s)
+  验证：认证缺失在创建运行前报告，不进行网络请求。
+PASSED tests/test_harness_loop.py::test_http_and_transport_errors_do_not_echo_credentials (0.000s)
+  验证：错误响应和传输异常即使包含敏感文本，公开异常也不输出原始内容。
+  ASSERT PASSED tests/test_harness_loop.py:810: '401' in str(failure.value)
+  ASSERT PASSED tests/test_harness_loop.py:811: 'test-only-secret' not in str(failure.value)
+  ASSERT PASSED tests/test_harness_loop.py:815: 'test-only-secret' not in str(failure.value)
+PASSED tests/test_harness_loop.py::test_invalid_chat_response_is_rejected[not json] (0.000s)
+  验证：响应结构错误不能伪造成功模型输出。
+PASSED tests/test_harness_loop.py::test_invalid_chat_response_is_rejected[payload1] (0.000s)
+  验证：响应结构错误不能伪造成功模型输出。
+PASSED tests/test_harness_loop.py::test_invalid_chat_response_is_rejected[payload2] (0.000s)
+  验证：响应结构错误不能伪造成功模型输出。
+PASSED tests/test_harness_loop.py::test_model_response_size_limit_is_enforced (0.000s)
+  验证：即使服务返回异常大响应，适配器也只接受配置的协议上限。
+PASSED tests/test_harness_loop.py::test_harness_refuses_secret_fields_in_public_metadata (0.000s)
+  验证：业务状态接口拒绝误传密钥字段。
+PASSED tests/test_harness_loop.py::test_cli_requires_explicit_real_backend_when_no_script (0.001s)
+  验证：遗漏离线脚本不会隐式切换真实服务，必须显式选择网络后端。
+  ASSERT PASSED tests/test_harness_loop.py:851: not (tmp_path / 'run').exists()
+PASSED tests/test_harness_loop.py::test_cli_real_backend_restores_public_configuration_and_environment_secret (0.035s)
+  验证：CLI 使用环境凭据，批准命令不调用模型，恢复固定原模型配置且不输出密钥。
+  ASSERT PASSED tests/test_harness_loop.py:871: 'test-only-secret' not in output
+  ASSERT PASSED tests/test_harness_loop.py:874: state['status'] == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:871: 'test-only-secret' not in output
+  ASSERT PASSED tests/test_harness_loop.py:877: len(transport.requests) == before
+  ASSERT PASSED tests/test_harness_loop.py:871: 'test-only-secret' not in output
+  ASSERT PASSED tests/test_harness_loop.py:879: complete['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_harness_loop.py:880: complete['model_config']['model_id'] == 'model-under-test'
+  ASSERT PASSED tests/test_harness_loop.py:881: transport.requests[-1]['json']['max_tokens'] == 512
+PASSED tests/test_harness_loop.py::test_cli_refuses_real_backend_combined_with_a_script (0.001s)
+  验证：模型后端和固定响应脚本不能混用，避免把固定输出误记为真实验收。
+  ASSERT PASSED tests/test_harness_loop.py:892: not (tmp_path / 'run').exists()
+PASSED tests/test_harness_loop.py::test_provider_output_limit_stops_without_retrying_or_losing_usage (0.009s)
+  验证：截断响应直接停止，既不执行残缺调用，也不浪费预算反复生成同一报告。
+  ASSERT PASSED tests/test_harness_loop.py:904: state.status == 'STOPPED'
+  ASSERT PASSED tests/test_harness_loop.py:905: state.stop_reason == 'MODEL_OUTPUT_LIMIT'
+  ASSERT PASSED tests/test_harness_loop.py:906: state.input_tokens == 100
+  ASSERT PASSED tests/test_harness_loop.py:907: state.output_tokens == 1024
+  ASSERT PASSED tests/test_harness_loop.py:908: not state.actions
+  ASSERT PASSED tests/test_harness_loop.py:909: len(transport.requests) == 1
+  ASSERT PASSED tests/test_harness_loop.py:910: not (tmp_path / 'run' / 'report.md').exists()
+PASSED tests/test_harness_loop.py::test_output_budget_extension_regenerates_clipped_response_without_replaying_tools[False] (0.033s)
+  验证：追加单次输出额度后重生成截断答复，原读取只执行一次，费用计数和审批保留。
+  ASSERT PASSED tests/test_harness_loop.py:928: before.stop_reason == "MODEL_OUTPUT_LIMIT" and before.steps_used == 2
+  ASSERT PASSED tests/test_harness_loop.py:929: before.tool_calls_used == 1 and "clipped-report" not in before.actions
+  ASSERT PASSED tests/test_harness_loop.py:941: len(transport.requests) == 2
+  ASSERT PASSED tests/test_harness_loop.py:942: state.status == "STOPPED" and state.stop_reason == "BUDGET_EXTENDED"
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:945: {key: value for key, value in state.model_config.items() if key != "max_tokens"} == {key: value for key, value in before.model_config.items() if key != "max_tokens"}
+  ASSERT PASSED tests/test_harness_loop.py:946: state.budget_changes[-1]["previous"]["model_max_tokens"] == config.max_tokens
+  ASSERT PASSED tests/test_harness_loop.py:947: state.budget_changes[-1]["updated"]["model_max_tokens"] == 4096
+  ASSERT PASSED tests/test_harness_loop.py:948: controller.resume().status == "WAITING_APPROVAL"
+  ASSERT PASSED tests/test_harness_loop.py:949: transport.requests[-1]["json"]["max_tokens"] == 4096
+  ASSERT PASSED tests/test_harness_loop.py:950: not (controller.run_dir / "report.md").exists()
+  ASSERT PASSED tests/test_harness_loop.py:952: controller.resume().status == "SUCCEEDED"
+  ASSERT PASSED tests/test_harness_loop.py:953: state.steps_used == 4 and state.tool_calls_used == 3
+  ASSERT PASSED tests/test_harness_loop.py:954: "clipped-report" not in state.actions
+  ASSERT PASSED tests/test_harness_loop.py:956: sum(row["event"] == "executed" and row["tool_call_id"] == "read" for row in events) == 1
+PASSED tests/test_harness_loop.py::test_output_budget_extension_regenerates_clipped_response_without_replaying_tools[True] (0.040s)
+  验证：追加单次输出额度后重生成截断答复，原读取只执行一次，费用计数和审批保留。
+  ASSERT PASSED tests/test_harness_loop.py:928: before.stop_reason == "MODEL_OUTPUT_LIMIT" and before.steps_used == 2
+  ASSERT PASSED tests/test_harness_loop.py:929: before.tool_calls_used == 1 and "clipped-report" not in before.actions
+  ASSERT PASSED tests/test_harness_loop.py:936: updated["model_config"]["max_tokens"] == 4096
+  ASSERT PASSED tests/test_harness_loop.py:941: len(transport.requests) == 2
+  ASSERT PASSED tests/test_harness_loop.py:942: state.status == "STOPPED" and state.stop_reason == "BUDGET_EXTENDED"
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:944: getattr(state, key) == getattr(before, key)
+  ASSERT PASSED tests/test_harness_loop.py:945: {key: value for key, value in state.model_config.items() if key != "max_tokens"} == {key: value for key, value in before.model_config.items() if key != "max_tokens"}
+  ASSERT PASSED tests/test_harness_loop.py:946: state.budget_changes[-1]["previous"]["model_max_tokens"] == config.max_tokens
+  ASSERT PASSED tests/test_harness_loop.py:947: state.budget_changes[-1]["updated"]["model_max_tokens"] == 4096
+  ASSERT PASSED tests/test_harness_loop.py:948: controller.resume().status == "WAITING_APPROVAL"
+  ASSERT PASSED tests/test_harness_loop.py:949: transport.requests[-1]["json"]["max_tokens"] == 4096
+  ASSERT PASSED tests/test_harness_loop.py:950: not (controller.run_dir / "report.md").exists()
+  ASSERT PASSED tests/test_harness_loop.py:952: controller.resume().status == "SUCCEEDED"
+  ASSERT PASSED tests/test_harness_loop.py:953: state.steps_used == 4 and state.tool_calls_used == 3
+  ASSERT PASSED tests/test_harness_loop.py:954: "clipped-report" not in state.actions
+  ASSERT PASSED tests/test_harness_loop.py:956: sum(row["event"] == "executed" and row["tool_call_id"] == "read" for row in events) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[None] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[0] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[True] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[512] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[1024] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[8193] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_output_extension_rejects_invalid_reduced_or_unchanged_limit[3.5] (0.009s)
+  验证：单次输出额度只允许在支持范围内增加，拒绝时保留截断状态及用量。
+  ASSERT PASSED tests/test_harness_loop.py:971: controller.state == before
+  ASSERT PASSED tests/test_harness_loop.py:972: model.config == config and len(transport.requests) == 1
+PASSED tests/test_harness_loop.py::test_step_extension_does_not_unlock_an_output_limited_run (0.009s)
+  验证：不同额度不能互相替代，输出截断必须提高对应单次上限。
+  ASSERT PASSED tests/test_harness_loop.py:985: controller.state.max_steps == 8 and controller.state.stop_reason == "MODEL_OUTPUT_LIMIT"
+  ASSERT PASSED tests/test_harness_loop.py:986: not controller.state.budget_changes
+PASSED tests/test_harness_loop.py::test_output_extension_requires_saved_real_model_configuration (0.010s)
+  验证：未提供用例说明
+  ASSERT PASSED tests/test_harness_loop.py:996: controller.state.max_steps == 1 and not controller.state.budget_changes
+PASSED tests/test_harness_loop.py::test_cli_parsing_errors_go_to_stderr_without_corrupting_json (0.015s)
+  验证：模型解析失败后继续执行时，诊断输出不能污染 CLI 的 JSON 标准输出。
+  ASSERT PASSED tests/test_harness_loop.py:1013: json.loads(captured.out)['status'] == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_harness_loop.py:1014: 'does not contain any JSON' in ' '.join(captured.err.split())
+PASSED tests/test_sandbox.py::test_escape_and_symlink_escape_are_denied (0.000s)
+  验证：拒绝相对路径越界、软链接越界和绝对路径访问。
+PASSED tests/test_sandbox.py::test_sensitive_paths_and_symlink_alias_are_denied (0.000s)
+  验证：请求路径和软链接落点中的敏感文件均受同一拒绝规则约束。
+PASSED tests/test_sandbox.py::test_read_limit_is_enforced (0.000s)
+  验证：超出原始字节上限时拒绝返回文件内容。
+PASSED tests/test_sandbox.py::test_write_rejects_symlink_and_preserves_external_content (0.000s)
+  验证：即便路径在写入白名单中，软链接目标仍不能进入替换流程。
+  ASSERT PASSED tests/test_sandbox.py:43: outside.read_text() == 'ORIGINAL = True\n'
+PASSED tests/test_sandbox.py::test_atomic_write_creates_allowed_file_and_returns_hashes (0.001s)
+  验证：允许创建父目录已存在的新文件，后续替换记录前后内容哈希。
+  ASSERT PASSED tests/test_sandbox.py:53: first['before_sha256'] is None
+  ASSERT PASSED tests/test_sandbox.py:54: second['before_sha256'] == first['sha256']
+  ASSERT PASSED tests/test_sandbox.py:55: second['sha256'] == hashlib.sha256(b'X = 2\n').hexdigest()
+  ASSERT PASSED tests/test_sandbox.py:56: (workspace / 'new.py').read_text() == 'X = 2\n'
+PASSED tests/test_sandbox.py::test_workspace_fingerprint_tracks_source_changes_but_ignores_runtime_cache (0.001s)
+  验证：工作区版本使用内容而非修改时间，Python 缓存不触发旧审批失效。
+  ASSERT PASSED tests/test_sandbox.py:65: sandbox.fingerprint() == original
+  ASSERT PASSED tests/test_sandbox.py:67: sandbox.fingerprint() != original
+PASSED tests/test_sandbox.py::test_fingerprint_tracks_allowed_directories_with_env_prefix (0.001s)
+  验证：指纹排除规则与访问规则保持一致，普通 .env 前缀目录仍参与版本核对。
+  ASSERT PASSED tests/test_sandbox.py:78: sandbox.read_file('.environment/config.py')['content'] == 'VALUE = 1\n'
+  ASSERT PASSED tests/test_sandbox.py:80: sandbox.fingerprint() != initial
+PASSED tests/test_sandbox.py::test_unregistered_test_command_is_never_spawned (0.000s)
+  验证：S3：未配置命令无法启动进程，拒绝发生在 Popen 之前。
+PASSED tests/test_sandbox.py::test_test_process_uses_filtered_environment (0.124s)
+  验证：子进程环境不继承凭据、代理或 Python/pytest 注入参数。
+  ASSERT PASSED tests/test_sandbox.py:104: result['status'] == 'PASSED'
+  ASSERT PASSED tests/test_sandbox.py:106: not any(key in environment for key in ('OPENAI_API_KEY', 'HTTP_PROXY', 'PYTHONPATH', 'PYTEST_ADDOPTS'))
+  ASSERT PASSED tests/test_sandbox.py:107: environment['HOME'] == str(tmp_path / 'runtime')
+  ASSERT PASSED tests/test_sandbox.py:108: environment['PYTEST_DISABLE_PLUGIN_AUTOLOAD'] == '1'
+PASSED tests/test_sandbox.py::test_test_output_is_bounded_and_process_is_terminated (0.125s)
+  验证：输出超限终止真实进程，缓冲区只保留配置字节数。
+  ASSERT PASSED tests/test_sandbox.py:117: result['status'] == 'OUTPUT_LIMIT'
+  ASSERT PASSED tests/test_sandbox.py:118: result['output_bytes'] == 256
+  ASSERT PASSED tests/test_sandbox.py:119: result['output'] == 'x' * 256
+  ASSERT PASSED tests/test_sandbox.py:120: result['returncode'] is not None
+  ASSERT PASSED tests/test_sandbox.py:121: result['duration_seconds'] < 2
+PASSED tests/test_sandbox.py::test_timeout_and_cancellation_kill_descendant_group[TIMEOUT] (1.124s)
+  验证：S4：组长和派生进程忽略 SIGTERM 时，超时及取消仍导致派生进程关闭全部 FD。
+  ASSERT PASSED tests/test_sandbox.py:165: result['status'] == reason
+  ASSERT PASSED tests/test_sandbox.py:166: result['returncode'] is not None
+  ASSERT PASSED tests/test_sandbox.py:167: result['duration_seconds'] < 3
+  ASSERT PASSED tests/test_sandbox.py:169: result['output'].strip().isdigit()
+  ASSERT PASSED tests/test_sandbox.py:143: os.read(descriptor, 1) == b''
+PASSED tests/test_sandbox.py::test_timeout_and_cancellation_kill_descendant_group[CANCELLED] (1.127s)
+  验证：S4：组长和派生进程忽略 SIGTERM 时，超时及取消仍导致派生进程关闭全部 FD。
+  ASSERT PASSED tests/test_sandbox.py:165: result['status'] == reason
+  ASSERT PASSED tests/test_sandbox.py:166: result['returncode'] is not None
+  ASSERT PASSED tests/test_sandbox.py:167: result['duration_seconds'] < 3
+  ASSERT PASSED tests/test_sandbox.py:169: result['output'].strip().isdigit()
+  ASSERT PASSED tests/test_sandbox.py:143: os.read(descriptor, 1) == b''
+PASSED tests/test_sandbox.py::test_real_pytest_failure_and_success_return_exit_codes (0.451s)
+  验证：测试结果来自真实 pytest 退出码，不能由固定模型响应替代。
+  ASSERT PASSED tests/test_sandbox.py:181: passed['status'] == 'PASSED'
+  ASSERT PASSED tests/test_sandbox.py:182: passed['returncode'] == 0
+  ASSERT PASSED tests/test_sandbox.py:185: failed['status'] == 'FAILED'
+  ASSERT PASSED tests/test_sandbox.py:186: failed['returncode'] != 0
+  ASSERT PASSED tests/test_sandbox.py:187: 'failed' in failed['output']
+PASSED tests/test_sandbox.py::test_exited_group_leader_does_not_leave_a_running_descendant (0.164s)
+  验证：即使组长已正常退出，也清理仍属于该组且忽略 SIGTERM 的派生进程。
+  ASSERT PASSED tests/test_sandbox.py:199: result['status'] == 'PASSED'
+  ASSERT PASSED tests/test_sandbox.py:200: result['output'].strip().isdigit()
+  ASSERT PASSED tests/test_sandbox.py:143: os.read(descriptor, 1) == b''
+PASSED tests/test_sandbox.py::test_symlink_swap_between_check_and_open_is_denied (0.001s)
+  验证：S2 边界：仅访问本用例创建的文件，复现检查后替换链接的并发窗口。
+PASSED tests/test_sandbox.py::test_parent_symlink_swap_after_validation_cannot_escape[read] (0.001s)
+  验证：路径检查后替换整个父目录，也不能读取外部内容、列出外部名称或越界写入。
+  ASSERT PASSED tests/test_sandbox.py:255: marker.read_text() == 'OUTSIDE_FIXTURE'
+  ASSERT PASSED tests/test_sandbox.py:256: not (outside / 'new.txt').exists()
+PASSED tests/test_sandbox.py::test_parent_symlink_swap_after_validation_cannot_escape[write] (0.001s)
+  验证：路径检查后替换整个父目录，也不能读取外部内容、列出外部名称或越界写入。
+  ASSERT PASSED tests/test_sandbox.py:255: marker.read_text() == 'OUTSIDE_FIXTURE'
+  ASSERT PASSED tests/test_sandbox.py:256: not (outside / 'new.txt').exists()
+PASSED tests/test_sandbox.py::test_parent_symlink_swap_after_validation_cannot_escape[list] (0.001s)
+  验证：路径检查后替换整个父目录，也不能读取外部内容、列出外部名称或越界写入。
+  ASSERT PASSED tests/test_sandbox.py:255: marker.read_text() == 'OUTSIDE_FIXTURE'
+  ASSERT PASSED tests/test_sandbox.py:256: not (outside / 'new.txt').exists()
+PASSED tests/test_sandbox.py::test_write_parent_swap_after_temp_sync_aborts_and_cleans_original_directory (0.001s)
+  验证：临时内容同步后父目录被替换时拒绝发布，并通过原目录描述符清理临时文件。
+  ASSERT PASSED tests/test_sandbox.py:287: swapped
+  ASSERT PASSED tests/test_sandbox.py:288: (outside / 'source.txt').read_text() == 'outside'
+  ASSERT PASSED tests/test_sandbox.py:289: (parked / 'source.txt').read_text() == 'inside'
+  ASSERT PASSED tests/test_sandbox.py:290: sorted(path.name for path in parked.iterdir()) == ['source.txt']
+PASSED tests/test_sandbox.py::test_search_does_not_return_content_from_swapped_symlink (0.001s)
+  验证：搜索与完整读取使用相同的实际打开边界，替换后的外部文本不能进入摘要。
+  ASSERT PASSED tests/test_sandbox.py:309: sandbox.search_code('OUTSIDE_FIXTURE', '.')['matches'] == []
+PASSED tests/test_sandbox.py::test_replaced_workspace_root_is_rejected[find] (0.000s)
+  验证：工作区根在初始化后被外部目录链接替换时，发现与指纹计算均不能越界。
+PASSED tests/test_sandbox.py::test_replaced_workspace_root_is_rejected[fingerprint] (0.001s)
+  验证：工作区根在初始化后被外部目录链接替换时，发现与指纹计算均不能越界。
+PASSED tests/test_sandbox.py::test_internal_read_symlink_retains_validated_target_behavior (0.001s)
+  验证：允许指向工作区内普通文件的读取别名，实际访问仍绑定校验后的目标。
+  ASSERT PASSED tests/test_sandbox.py:331: sandbox.read_file('alias.py')['content'] == sandbox.read_file('calculator.py')['content']
+PASSED tests/test_sandbox.py::test_discovery_hides_sensitive_paths_and_symlinks (0.002s)
+  验证：列目录、查找和搜索均不能暴露敏感文件或通过软链接读取外部内容。
+  ASSERT PASSED tests/test_sandbox.py:348: not {'.env', '.git', 'alias.py'} & {item['path'] for item in listing['entries']}
+  ASSERT PASSED tests/test_sandbox.py:349: 'alias.py' not in {item['path'] for item in sandbox.find_files('*.py')['files']}
+  ASSERT PASSED tests/test_sandbox.py:350: not sandbox.search_code('outside-needle', '.')['matches']
+PASSED tests/test_sandbox.py::test_find_and_literal_search_return_source_paths_and_line_numbers (0.001s)
+  验证：glob 支持根目录文件，搜索返回真实行号而不是正则表达式匹配。
+  ASSERT PASSED tests/test_sandbox.py:361: {'calculator.py', 'test_calculator.py', 'pattern.py'} <= paths
+  ASSERT PASSED tests/test_sandbox.py:363: matches == [{'path': 'pattern.py', 'line': 2, 'text': 'value = ".*"'}]
+PASSED tests/test_sandbox.py::test_discovery_reports_truncated_results (0.069s)
+  验证：结果条目受限且显式标记不完整，不能将截断结果解释为全仓库结果。
+  ASSERT PASSED tests/test_sandbox.py:371: len(sandbox.list_files('.')['entries']) == 200
+  ASSERT PASSED tests/test_sandbox.py:372: sandbox.list_files('.')['truncated']
+  ASSERT PASSED tests/test_sandbox.py:373: len(sandbox.find_files('*.txt')['files']) == 200
+  ASSERT PASSED tests/test_sandbox.py:375: len(search['matches']) == 100
+  ASSERT PASSED tests/test_sandbox.py:376: search['truncated']
+  ASSERT PASSED tests/test_sandbox.py:377: len(json.dumps(search).encode()) < 64 * 1024
+PASSED tests/test_sandbox.py::test_search_enforces_total_read_budget_and_skips_binary (0.006s)
+  验证：大批无匹配文件也受读取预算约束，二进制内容不作为源码摘要返回。
+  ASSERT PASSED tests/test_sandbox.py:386: result['bytes_read'] <= 1024 * 1024
+  ASSERT PASSED tests/test_sandbox.py:387: result['truncated']
+  ASSERT PASSED tests/test_sandbox.py:388: not result['matches']
+PASSED tests/test_sandbox.py::test_discovery_calls_use_gate_and_do_not_replace_read_evidence (0.027s)
+  验证：发现结果经过 Gate 与审计，但摘要不足以满足最终答复的源码读取条件。
+  ASSERT PASSED tests/test_sandbox.py:402: state.status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_sandbox.py:403: state.tool_calls_used == 5
+  ASSERT PASSED tests/test_sandbox.py:404: len(state.evidence) == 1
+  ASSERT PASSED tests/test_sandbox.py:406: {'list', 'find', 'search'} <= {item['tool_call_id'] for item in events if item['event'] == 'executed'}
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cli_preserves_progress_and_resumes_without_replaying_write (0.596s)
+  验证：宿主追加总预算后换进程继续，保留原调用、审批和计数，不重写已完成源码。
+  ASSERT PASSED tests/test_state_checkpoint.py:27: controller.resume().stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:35: updated["max_steps"] == 4 and updated["max_tool_calls"] == 8
+  ASSERT PASSED tests/test_state_checkpoint.py:36: (updated["status"], updated["stop_reason"]) == ("STOPPED", "BUDGET_EXTENDED")
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:38: updated[key] == before[key]
+  ASSERT PASSED tests/test_state_checkpoint.py:39: updated["budget_changes"][-1]["actor"] == "operator"
+  ASSERT PASSED tests/test_state_checkpoint.py:40: updated["budget_changes"][-1]["previous"]["max_steps"] == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:41: updated["budget_changes"][-1]["updated"]["max_steps"] == 4
+  ASSERT PASSED tests/test_state_checkpoint.py:42: "harness.py" in updated["budget_changes"][-1]["implementation_sha256"]
+  ASSERT PASSED tests/test_state_checkpoint.py:58: final["status"] == "SUCCEEDED"
+  ASSERT PASSED tests/test_state_checkpoint.py:59: final["steps_used"] == final["tool_calls_used"] == 4
+  ASSERT PASSED tests/test_state_checkpoint.py:60: len(final["writes"]) == 1 and final["actions"]["write"]["status"] == "SUCCEEDED"
+  ASSERT PASSED tests/test_state_checkpoint.py:61: (workspace / "calculator.py").read_text() == content
+  ASSERT PASSED tests/test_state_checkpoint.py:63: sum(row["event"] == "executed" and row["tool_call_id"] == "write" for row in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:64: any(row["event"] == "budget_extended" and row["actor"] == "operator" for row in events)
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits0] (0.018s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits1] (0.016s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits2] (0.017s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits3] (0.016s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits4] (0.016s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits5] (0.016s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits6] (0.016s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_budget_extension_rejects_noop_reduction_and_insufficient_allowance[limits7] (0.016s)
+  验证：预算只能增加，且必须让当前已耗尽的限制有剩余额度；拒绝时不改计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:79: controller.run("Read source").stop_reason == "MAX_STEPS"
+  ASSERT PASSED tests/test_state_checkpoint.py:83: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:84: asdict(Checkpoint(controller.run_dir / "checkpoint.json").load()) == before
+PASSED tests/test_state_checkpoint.py::test_tool_call_budget_can_be_extended_without_resetting_seen_ids (0.028s)
+  验证：工具预算耗尽也可由宿主追加；预算拒绝的旧 ID 仍不能重新执行。
+  ASSERT PASSED tests/test_state_checkpoint.py:95: controller.run("Explain source").stop_reason == "MAX_TOOL_CALLS"
+  ASSERT PASSED tests/test_state_checkpoint.py:97: controller.state.tool_calls_used == 1 and controller.state.steps_used == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:98: "over-budget" in controller.state.seen_call_ids
+  ASSERT PASSED tests/test_state_checkpoint.py:103: recovered.resume().status == "SUCCEEDED"
+  ASSERT PASSED tests/test_state_checkpoint.py:104: recovered.state.tool_calls_used == 3 and recovered.state.steps_used == 4
+  ASSERT PASSED tests/test_state_checkpoint.py:105: recovered.state.rejections[-1]["result"]["error"]["code"] == "DUPLICATE_CALL"
+PASSED tests/test_state_checkpoint.py::test_budget_extension_blocks_workspace_drift[limits0] (0.011s)
+  验证：追加预算不能越过工作区版本核对；旧读取证据必须失效并停止。
+  ASSERT PASSED tests/test_state_checkpoint.py:120: controller.state.status == "WAITING_REVIEW"
+  ASSERT PASSED tests/test_state_checkpoint.py:121: not controller.state.evidence and not controller.state.budget_changes
+  ASSERT PASSED tests/test_state_checkpoint.py:122: controller.state.max_steps == 1
+PASSED tests/test_state_checkpoint.py::test_budget_extension_blocks_workspace_drift[limits1] (0.011s)
+  验证：追加预算不能越过工作区版本核对；旧读取证据必须失效并停止。
+  ASSERT PASSED tests/test_state_checkpoint.py:120: controller.state.status == "WAITING_REVIEW"
+  ASSERT PASSED tests/test_state_checkpoint.py:121: not controller.state.evidence and not controller.state.budget_changes
+  ASSERT PASSED tests/test_state_checkpoint.py:122: controller.state.max_steps == 1
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-pending] (0.010s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-denied] (0.012s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-completed] (0.015s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:136: controller.run("Read source").status == "SUCCEEDED"
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits0-unknown] (0.015s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:151: controller.resume().status == "WAITING_REVIEW"
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-pending] (0.011s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-denied] (0.011s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-completed] (0.014s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:136: controller.run("Read source").status == "SUCCEEDED"
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_budget_extension_cannot_unlock_approval_or_review_or_terminal_states[limits1-unknown] (0.015s)
+  验证：预算控制不是审批或恢复后门，待审批、拒绝、完成与未知写入均不可解锁。
+  ASSERT PASSED tests/test_state_checkpoint.py:151: controller.resume().status == "WAITING_REVIEW"
+  ASSERT PASSED tests/test_state_checkpoint.py:155: asdict(controller.state) == before
+  ASSERT PASSED tests/test_state_checkpoint.py:156: "extend-budget" not in controller.gate.tools and "extend_budget" not in controller.gate.tools
+PASSED tests/test_state_checkpoint.py::test_host_review_closes_unknown_run_without_replaying_or_claiming_success (0.017s)
+  验证：人工核对后终止旧运行，未知动作仍保留，新进程不能把关闭状态重新开启。
+  ASSERT PASSED tests/test_state_checkpoint.py:175: controller.resume().status == "WAITING_REVIEW"
+  ASSERT PASSED tests/test_state_checkpoint.py:178: recovered.state.status == "STOPPED" and recovered.state.stop_reason == "HOST_REVIEW_CLOSED"
+  ASSERT PASSED tests/test_state_checkpoint.py:179: recovered.state.actions["write"]["status"] == "UNKNOWN_RESULT"
+  ASSERT PASSED tests/test_state_checkpoint.py:180: len(recovered.state.writes) == 1
+PASSED tests/test_state_checkpoint.py::test_model_plan_is_updated_and_used_after_new_process_resume (0.321s)
+  验证：模型计划、版本及游标跨进程恢复，并实际注入下一次模型调用上下文。
+  ASSERT PASSED tests/test_state_checkpoint.py:199: state.plan == plan and state.plan_revision == 3 and state.plan_cursor == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:223: restored["status"] == "SUCCEEDED" and restored["plan_status"] == "COMPLETED"
+  ASSERT PASSED tests/test_state_checkpoint.py:224: restored["plan"] == plan and restored["plan_revision"] == 4 and restored["plan_cursor"] == len(plan)
+  ASSERT PASSED tests/test_state_checkpoint.py:225: restored["steps_used"] == 6 and restored["tool_calls_used"] == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:227: {row["tool_call_id"] for row in events if row["event"] == "plan_updated"} == {"plan-create", "plan-progress", "plan-finish"}
+PASSED tests/test_state_checkpoint.py::test_workspace_drift_marks_saved_plan_for_review (0.020s)
+  验证：工作区变化保留计划文字及历史进度，但不让旧计划作为当前完成依据。
+  ASSERT PASSED tests/test_state_checkpoint.py:243: restored.state.plan == plan
+  ASSERT PASSED tests/test_state_checkpoint.py:244: restored.state.plan_status == "NEEDS_REVIEW"
+  ASSERT PASSED tests/test_state_checkpoint.py:245: restored.resume().status == "WAITING_REVIEW"
+PASSED tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[action_result-6-None] (0.770s)
+  验证：C3/H3：最终结果已提交后各收尾窗口退出，恢复不再消耗预算或重放写入。
+  ASSERT PASSED tests/test_state_checkpoint.py:275: controller.run('Fix add').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:277: controller.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:312: child.returncode == 77
+  ASSERT PASSED tests/test_state_checkpoint.py:314: snapshot.status == 'RUNNING'
+  ASSERT PASSED tests/test_state_checkpoint.py:315: snapshot.actions['final']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:316: snapshot.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:317: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:325: no_more_requests.calls == 0
+  ASSERT PASSED tests/test_state_checkpoint.py:326: state.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:327: state.tool_calls_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:328: len(state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:329: len(state.tests) == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:335: (state.status, state.stop_reason) == ('SUCCEEDED', 'COMPLETED')
+  ASSERT PASSED tests/test_state_checkpoint.py:336: state.answer == 'See report.md'
+  ASSERT PASSED tests/test_state_checkpoint.py:337: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:338: json.loads((run_dir / 'test-results.json').read_text()) == state.tests
+  ASSERT PASSED tests/test_state_checkpoint.py:339: (run_dir / 'changes.patch').read_text() == state.writes[0]['diff']
+  ASSERT PASSED tests/test_state_checkpoint.py:340: (workspace / 'calculator.py').read_text() == replacement
+  ASSERT PASSED tests/test_state_checkpoint.py:341: StateStore(run_dir / 'state.json').load() == Checkpoint(run_dir / 'checkpoint.json').load()
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:345: any(event['event'] == 'completion_recovered' for event in events)
+PASSED tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-None] (0.767s)
+  验证：C3/H3：最终结果已提交后各收尾窗口退出，恢复不再消耗预算或重放写入。
+  ASSERT PASSED tests/test_state_checkpoint.py:275: controller.run('Fix add').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:277: controller.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:312: child.returncode == 77
+  ASSERT PASSED tests/test_state_checkpoint.py:314: snapshot.status == 'RUNNING'
+  ASSERT PASSED tests/test_state_checkpoint.py:315: snapshot.actions['final']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:316: snapshot.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:317: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:325: no_more_requests.calls == 0
+  ASSERT PASSED tests/test_state_checkpoint.py:326: state.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:327: state.tool_calls_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:328: len(state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:329: len(state.tests) == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:335: (state.status, state.stop_reason) == ('SUCCEEDED', 'COMPLETED')
+  ASSERT PASSED tests/test_state_checkpoint.py:336: state.answer == 'See report.md'
+  ASSERT PASSED tests/test_state_checkpoint.py:337: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:338: json.loads((run_dir / 'test-results.json').read_text()) == state.tests
+  ASSERT PASSED tests/test_state_checkpoint.py:339: (run_dir / 'changes.patch').read_text() == state.writes[0]['diff']
+  ASSERT PASSED tests/test_state_checkpoint.py:340: (workspace / 'calculator.py').read_text() == replacement
+  ASSERT PASSED tests/test_state_checkpoint.py:341: StateStore(run_dir / 'state.json').load() == Checkpoint(run_dir / 'checkpoint.json').load()
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:345: any(event['event'] == 'completion_recovered' for event in events)
+PASSED tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-8-None] (0.777s)
+  验证：C3/H3：最终结果已提交后各收尾窗口退出，恢复不再消耗预算或重放写入。
+  ASSERT PASSED tests/test_state_checkpoint.py:275: controller.run('Fix add').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:277: controller.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:312: child.returncode == 77
+  ASSERT PASSED tests/test_state_checkpoint.py:314: snapshot.status == 'RUNNING'
+  ASSERT PASSED tests/test_state_checkpoint.py:315: snapshot.actions['final']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:316: snapshot.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:317: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:325: no_more_requests.calls == 0
+  ASSERT PASSED tests/test_state_checkpoint.py:326: state.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:327: state.tool_calls_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:328: len(state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:329: len(state.tests) == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:335: (state.status, state.stop_reason) == ('SUCCEEDED', 'COMPLETED')
+  ASSERT PASSED tests/test_state_checkpoint.py:336: state.answer == 'See report.md'
+  ASSERT PASSED tests/test_state_checkpoint.py:337: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:338: json.loads((run_dir / 'test-results.json').read_text()) == state.tests
+  ASSERT PASSED tests/test_state_checkpoint.py:339: (run_dir / 'changes.patch').read_text() == state.writes[0]['diff']
+  ASSERT PASSED tests/test_state_checkpoint.py:340: (workspace / 'calculator.py').read_text() == replacement
+  ASSERT PASSED tests/test_state_checkpoint.py:341: StateStore(run_dir / 'state.json').load() == Checkpoint(run_dir / 'checkpoint.json').load()
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:345: any(event['event'] == 'completion_recovered' for event in events)
+PASSED tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[artifact_export-6-None] (0.768s)
+  验证：C3/H3：最终结果已提交后各收尾窗口退出，恢复不再消耗预算或重放写入。
+  ASSERT PASSED tests/test_state_checkpoint.py:275: controller.run('Fix add').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:277: controller.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:312: child.returncode == 77
+  ASSERT PASSED tests/test_state_checkpoint.py:314: snapshot.status == 'RUNNING'
+  ASSERT PASSED tests/test_state_checkpoint.py:315: snapshot.actions['final']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:316: snapshot.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:317: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:325: no_more_requests.calls == 0
+  ASSERT PASSED tests/test_state_checkpoint.py:326: state.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:327: state.tool_calls_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:328: len(state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:329: len(state.tests) == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:335: (state.status, state.stop_reason) == ('SUCCEEDED', 'COMPLETED')
+  ASSERT PASSED tests/test_state_checkpoint.py:336: state.answer == 'See report.md'
+  ASSERT PASSED tests/test_state_checkpoint.py:337: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:338: json.loads((run_dir / 'test-results.json').read_text()) == state.tests
+  ASSERT PASSED tests/test_state_checkpoint.py:339: (run_dir / 'changes.patch').read_text() == state.writes[0]['diff']
+  ASSERT PASSED tests/test_state_checkpoint.py:340: (workspace / 'calculator.py').read_text() == replacement
+  ASSERT PASSED tests/test_state_checkpoint.py:341: StateStore(run_dir / 'state.json').load() == Checkpoint(run_dir / 'checkpoint.json').load()
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:344: sum(event['event'] == 'executed' and event['tool_call_id'] == call_id for event in events) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:345: any(event['event'] == 'completion_recovered' for event in events)
+PASSED tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-report] (0.787s)
+  验证：C3/H3：最终结果已提交后各收尾窗口退出，恢复不再消耗预算或重放写入。
+  ASSERT PASSED tests/test_state_checkpoint.py:275: controller.run('Fix add').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:277: controller.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:312: child.returncode == 77
+  ASSERT PASSED tests/test_state_checkpoint.py:314: snapshot.status == 'RUNNING'
+  ASSERT PASSED tests/test_state_checkpoint.py:315: snapshot.actions['final']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:316: snapshot.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:317: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:325: no_more_requests.calls == 0
+  ASSERT PASSED tests/test_state_checkpoint.py:326: state.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:327: state.tool_calls_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:328: len(state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:329: len(state.tests) == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:331: state.status == 'WAITING_REVIEW'
+  ASSERT PASSED tests/test_state_checkpoint.py:332: state.stop_reason == ('WORKSPACE_CHANGED' if tamper == 'source' else 'COMPLETION_EVIDENCE_CHANGED')
+  ASSERT PASSED tests/test_state_checkpoint.py:333: not state.report_evidence['valid']
+PASSED tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-source] (0.790s)
+  验证：C3/H3：最终结果已提交后各收尾窗口退出，恢复不再消耗预算或重放写入。
+  ASSERT PASSED tests/test_state_checkpoint.py:275: controller.run('Fix add').status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:277: controller.resume().status == 'WAITING_APPROVAL'
+  ASSERT PASSED tests/test_state_checkpoint.py:312: child.returncode == 77
+  ASSERT PASSED tests/test_state_checkpoint.py:314: snapshot.status == 'RUNNING'
+  ASSERT PASSED tests/test_state_checkpoint.py:315: snapshot.actions['final']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:316: snapshot.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:317: (run_dir / 'report.md').read_text() == report
+  ASSERT PASSED tests/test_state_checkpoint.py:325: no_more_requests.calls == 0
+  ASSERT PASSED tests/test_state_checkpoint.py:326: state.steps_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:327: state.tool_calls_used == 6
+  ASSERT PASSED tests/test_state_checkpoint.py:328: len(state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:329: len(state.tests) == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:331: state.status == 'WAITING_REVIEW'
+  ASSERT PASSED tests/test_state_checkpoint.py:332: state.stop_reason == ('WORKSPACE_CHANGED' if tamper == 'source' else 'COMPLETION_EVIDENCE_CHANGED')
+  ASSERT PASSED tests/test_state_checkpoint.py:333: not state.report_evidence['valid']
+PASSED tests/test_state_checkpoint.py::test_state_and_checkpoint_preserve_business_fields (0.002s)
+  验证：完整往返保存运行配置、证据、预算、审批字段与停止原因。
+  ASSERT PASSED tests/test_state_checkpoint.py:363: asdict(store.load()) == asdict(state)
+  ASSERT PASSED tests/test_state_checkpoint.py:364: asdict(checkpoint.load()) == asdict(state)
+PASSED tests/test_state_checkpoint.py::test_snapshot_can_be_loaded_in_new_process_without_resetting_counter (0.035s)
+  验证：使用同一解释器启动独立进程，验证读取快照不会清零已有计数。
+  ASSERT PASSED tests/test_state_checkpoint.py:386: json.loads(result.stdout)["steps_used"] == 3
+PASSED tests/test_state_checkpoint.py::test_new_process_resumes_approved_write_without_reset_or_reexecution (0.325s)
+  验证：C3：换进程恢复后完成写入，重复调用被拒绝，步骤和工具计数继续累计。
+  ASSERT PASSED tests/test_state_checkpoint.py:433: state['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:434: state['steps_used'] == 4
+  ASSERT PASSED tests/test_state_checkpoint.py:435: state['tool_calls_used'] == 4
+  ASSERT PASSED tests/test_state_checkpoint.py:436: len(state['writes']) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:437: state['run_id'] == harness.state.run_id
+  ASSERT PASSED tests/test_state_checkpoint.py:438: (workspace / 'calculator.py').read_text() == content
+  ASSERT PASSED tests/test_state_checkpoint.py:439: state['actions']['write-1']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:441: len([item for item in events if item['event'] == 'executed' and item['tool_call_id'] == 'write-1']) == 1
+PASSED tests/test_state_checkpoint.py::test_crash_after_write_before_result_commit_becomes_unknown (0.280s)
+  验证：C2：写入完成后强制退出，恢复标记 UNKNOWN_RESULT 而不自动重放。
+  ASSERT PASSED tests/test_state_checkpoint.py:467: result.returncode == 73
+  ASSERT PASSED tests/test_state_checkpoint.py:468: (workspace / 'calculator.py').read_text() == content
+  ASSERT PASSED tests/test_state_checkpoint.py:470: controller.state.status == 'WAITING_REVIEW'
+  ASSERT PASSED tests/test_state_checkpoint.py:471: controller.state.stop_reason == 'UNKNOWN_RESULT'
+  ASSERT PASSED tests/test_state_checkpoint.py:472: controller.state.actions['write-1']['status'] == 'UNKNOWN_RESULT'
+  ASSERT PASSED tests/test_state_checkpoint.py:474: controller.resume().stop_reason == 'UNKNOWN_RESULT'
+  ASSERT PASSED tests/test_state_checkpoint.py:475: controller.state.revision == revision
+  ASSERT PASSED tests/test_state_checkpoint.py:476: not controller.state.writes
+PASSED tests/test_state_checkpoint.py::test_workspace_changes_invalidate_old_approval_and_evidence (0.021s)
+  验证：C4：恢复时检测目标版本变化，撤销旧审批和读取证据，停止等待核对。
+  ASSERT PASSED tests/test_state_checkpoint.py:494: recovered.state.status == 'WAITING_REVIEW'
+  ASSERT PASSED tests/test_state_checkpoint.py:495: recovered.state.stop_reason == 'WORKSPACE_CHANGED'
+  ASSERT PASSED tests/test_state_checkpoint.py:496: recovered.state.approvals['write-1']['status'] == 'INVALIDATED'
+  ASSERT PASSED tests/test_state_checkpoint.py:497: not recovered.state.evidence
+  ASSERT PASSED tests/test_state_checkpoint.py:498: not recovered.state.writes
+  ASSERT PASSED tests/test_state_checkpoint.py:500: (workspace / 'calculator.py').read_text() == 'EXTERNAL_CHANGE = True\n'
+PASSED tests/test_state_checkpoint.py::test_checkpoint_is_authoritative_if_state_view_is_outdated (0.016s)
+  验证：恢复使用先提交的权威检查点，不让较旧状态视图抹掉已批准动作。
+  ASSERT PASSED tests/test_state_checkpoint.py:514: recovered.state.approvals['write-1']['status'] == 'APPROVED'
+  ASSERT PASSED tests/test_state_checkpoint.py:515: json.loads((run_dir / 'state.json').read_text())['revision'] == recovered.state.revision
+PASSED tests/test_state_checkpoint.py::test_stale_controller_cannot_overwrite_newer_decision (0.016s)
+  验证：陈旧实例必须重新加载，不能覆盖其他控制器已提交的状态。
+  ASSERT PASSED tests/test_state_checkpoint.py:530: latest.state.stop_reason == 'APPROVAL_DENIED'
+PASSED tests/test_state_checkpoint.py::test_confirmed_write_is_not_replayed_after_exit_before_step_callback (0.298s)
+  验证：执行结果已提交但步骤回调未运行时退出，恢复后直接使用已知结果继续。
+  ASSERT PASSED tests/test_state_checkpoint.py:557: result.returncode == 74
+  ASSERT PASSED tests/test_state_checkpoint.py:563: recovered.state.pending_action is None
+  ASSERT PASSED tests/test_state_checkpoint.py:564: recovered.state.actions['write-1']['status'] == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:565: len(recovered.state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:567: outcome['ok']
+  ASSERT PASSED tests/test_state_checkpoint.py:569: recovered.state.status == 'SUCCEEDED'
+  ASSERT PASSED tests/test_state_checkpoint.py:570: len(recovered.state.writes) == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:571: (workspace / 'calculator.py').read_text() == content
+PASSED tests/test_state_checkpoint.py::test_external_change_between_approval_and_execution_blocks_write (0.012s)
+  验证：同一控制器批准后若工作区变化，resume 仍必须重新校验版本。
+  ASSERT PASSED tests/test_state_checkpoint.py:580: state.status == 'WAITING_REVIEW'
+  ASSERT PASSED tests/test_state_checkpoint.py:581: state.approvals['write-1']['status'] == 'INVALIDATED'
+  ASSERT PASSED tests/test_state_checkpoint.py:582: not state.writes
+  ASSERT PASSED tests/test_state_checkpoint.py:583: (workspace / 'calculator.py').read_text() == 'EXTERNAL = True\n'
+PASSED tests/test_state_checkpoint.py::test_concurrent_controller_is_rejected_by_process_lock (0.290s)
+  验证：运行锁覆盖跨进程控制器，防止两个宿主同时批准或执行同一动作。
+  ASSERT PASSED tests/test_state_checkpoint.py:607: result.returncode == 42
+PASSED tests/test_state_checkpoint.py::test_returned_rejection_is_durable_before_step_callback (0.278s)
+  验证：恢复窗口：拒绝已返回并已审计，但步骤回调前退出时仍应保留调用预算。
+  ASSERT PASSED tests/test_state_checkpoint.py:634: child.returncode == 81
+  ASSERT PASSED tests/test_state_checkpoint.py:636: any(event['event'] == 'rejected' for event in audit)
+  ASSERT PASSED tests/test_state_checkpoint.py:638: state.tool_calls_used == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:639: 'invalid-call' in state.seen_call_ids
+  ASSERT PASSED tests/test_state_checkpoint.py:640: state.steps_used == 1
+  ASSERT PASSED tests/test_state_checkpoint.py:641: state.actions['invalid-call']['result']['error']['code'] == 'INVALID_ARGUMENTS'
+  ASSERT PASSED tests/test_state_checkpoint.py:642: state.rejections[0]['result'] == state.actions['invalid-call']['result']
+  ASSERT PASSED tests/test_state_checkpoint.py:650: json.loads(recovered.state.steps[0]['observations'])['error']['code'] == 'INVALID_ARGUMENTS'
+  ASSERT PASSED tests/test_state_checkpoint.py:652: result.tool_calls_used == 2
+  ASSERT PASSED tests/test_state_checkpoint.py:653: result.stop_reason == 'MAX_TOOL_CALLS'
+  ASSERT PASSED tests/test_state_checkpoint.py:654: result.actions['extra-read']['status'] == 'REJECTED'
+  ASSERT PASSED tests/test_state_checkpoint.py:656: json.loads(again.state.steps[1]['observations'])['error']['code'] == 'DUPLICATE_CALL'
+  ASSERT PASSED tests/test_state_checkpoint.py:657: again.state.actions['invalid-call']['result']['error']['code'] == 'INVALID_ARGUMENTS'
+PASSED tests/test_state_checkpoint.py::test_resume_does_not_adopt_a_symlink_redirected_workspace (0.013s)
+  验证：跨进程加载时不能把旧工作区路径的新软链接落点当作已授权根。
+  ASSERT PASSED tests/test_state_checkpoint.py:672: controller.run('Inspect source').status == 'WAITING_APPROVAL'
+pytest exit status: 0; 清单仅记录 Python assert，pytest.raises / Mock 检查由用例结果体现。
+============================= slowest 10 durations =============================
+1.92s call     tests/test_harness_loop.py::test_repair_cli_restores_command_policy_and_test_evidence
+1.14s call     tests/test_harness_loop.py::test_command_line_approval_and_resume_use_separate_processes
+1.13s call     tests/test_sandbox.py::test_timeout_and_cancellation_kill_descendant_group[CANCELLED]
+1.12s call     tests/test_sandbox.py::test_timeout_and_cancellation_kill_descendant_group[TIMEOUT]
+0.79s call     tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-source]
+0.79s call     tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-report]
+0.78s call     tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-8-None]
+0.77s call     tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[action_result-6-None]
+0.77s call     tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[artifact_export-6-None]
+0.77s call     tests/test_state_checkpoint.py::test_final_result_recovers_without_model_or_tool_replay[step_callback-6-None]
+============================= 203 passed in 20.89s =============================

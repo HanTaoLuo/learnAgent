@@ -1,0 +1,9 @@
+[
+  {"id": "read-fixed", "tool": "read_file", "arguments": {"path": "calculator.py"}},
+  {"id": "retest", "tool": "run_test", "arguments": {"name": "unit"}},
+  {
+    "id": "repair-report",
+    "tool": "write_report",
+    "arguments": {"content": "# 修复记录\n\ncalculator.py 的 add(a, b) 已从减法修复为加法。\n\n必测命令 unit 在初始版本失败，在批准修改后的当前版本通过。\n\n变更见 changes.patch，真实进程结果见 test-results.json，审批与执行链见 audit.jsonl。\n"}
+  }
+]

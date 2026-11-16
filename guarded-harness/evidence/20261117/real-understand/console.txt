@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/workspace/guarded-harness/.venv/bin/guarded-harness", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/workspace/guarded-harness/src/guarded_harness/harness.py", line 1326, in main
+    harness = Harness(args.workspace, run_dir, model, max_steps=option('max_steps', 24),
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/guarded-harness/src/guarded_harness/harness.py", line 567, in __init__
+    self.run_dir.mkdir(parents=True, exist_ok=False)
+  File "/opt/python/lib/python3.12/pathlib.py", line 1311, in mkdir
+    os.mkdir(self, mode)
+FileExistsError: [Errno 17] File exists: '/workspace/runs/understand'

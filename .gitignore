@@ -7,3 +7,10 @@ __pycache__/
 
 # IDE 本地配置
 .idea/
+
+# Guarded Harness 的原始运行和备份含本机路径、模型上下文及操作者信息。
+/guarded-harness-verification/
+/.guarded-harness-output-backups/
+/.guarded-harness-runs/
+.env
+.env.*

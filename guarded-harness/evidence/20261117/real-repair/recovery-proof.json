@@ -1,0 +1,30 @@
+{
+  "run_id": "980fdbd70f8942098d93e29a7c610e6c",
+  "checks": {
+    "same_run_id": true,
+    "paused_on_report": true,
+    "writes_preserved": true,
+    "counters_continue": true,
+    "limits_preserved": true,
+    "source_executed_once": true,
+    "checkpoint_loaded": true,
+    "completion_confirmed": true
+  },
+  "source_execution_counts": {
+    "call_00_ftPaUTGL5pk8j5GrZb8u2487": 1
+  },
+  "before": {
+    "status": "WAITING_APPROVAL",
+    "stop_reason": "APPROVAL_REQUIRED",
+    "steps_used": 8,
+    "tool_calls_used": 8,
+    "revision": 31
+  },
+  "after": {
+    "status": "SUCCEEDED",
+    "stop_reason": "COMPLETED",
+    "steps_used": 9,
+    "tool_calls_used": 9,
+    "revision": 40
+  }
+}
